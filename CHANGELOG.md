@@ -11,3 +11,4 @@
 ### Documentation
 
 * ✏️ Add documentation ([3d42901](https://github.com/phun-ky/typeof/commit/3d429016e809d4c3e1ca5badbb9330c8af6eb231))
+## [1.0.2](https://github.com/phun-ky/typeof/compare/1.0.1...1.0.2) (2024-11-22)
