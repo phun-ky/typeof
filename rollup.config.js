@@ -41,15 +41,6 @@ export default [
       {
         name: 'typeof',
         file: './dist/typeof.js',
-        format: 'umd',
-        sourcemap: true,
-        banner,
-        exports: 'named',
-        assetFileNames: '[name][extname]'
-      },
-      {
-        name: 'typeof',
-        file: './dist/typeof.esm.js',
         format: 'esm',
         sourcemap: true,
         banner,
