@@ -3,7 +3,6 @@
   "version": "1.0.2",
   "description": "A set of helper functions to check for types",
   "main": "dist/typeof.js",
-  "module": "dist/typeof.esm.js",
   "types": "dist/typeof.d.ts",
   "funding": "https://github.com/phun-ky/typeof?sponsor=1",
   "type": "module",
@@ -27,8 +26,6 @@
     "release": "release-it"
   },
   "files": [
-    "/dist/typeof.esm.js",
-    "/dist/typeof.esm.js.map",
     "/dist/typeof.js",
     "/dist/typeof.js.map",
     "/dist/typeof.d.ts"
