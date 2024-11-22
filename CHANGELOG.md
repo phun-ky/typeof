@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/phun-ky/typeof/compare/1.0.2...1.0.3) (2024-11-22)
+
+
+### Bug
+
+* 🐛 Only use esm ([48e8a8a](https://github.com/phun-ky/typeof/commit/48e8a8a2f2b171783e2ee4e95d76087190b0848b))
+
 ## [1.0.2](https://github.com/phun-ky/typeof/compare/1.0.1...1.0.2) (2024-11-22)
 
 

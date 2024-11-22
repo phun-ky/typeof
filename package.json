@@ -1,6 +1,6 @@
 {
   "name": "@phun-ky/typeof",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A set of helper functions to check for types",
   "main": "dist/typeof.js",
   "types": "dist/typeof.d.ts",
