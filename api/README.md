@@ -2,7 +2,19 @@
 
 ---
 
-> Last updated 2024-11-22T12:11:22.124Z
+> Last updated 2025-02-17T18:35:33.675Z
+
+## Table of Contents
+
+- [Functions](#functions)
+  - [isBoolean()](#isboolean)
+  - [isNotBoolean()](#isnotboolean)
+  - [isNotNumber()](#isnotnumber)
+  - [isNotString()](#isnotstring)
+  - [isNotUndefined()](#isnotundefined)
+  - [isNumber()](#isnumber)
+  - [isString()](#isstring)
+  - [isUndefined()](#isundefined)
 
 ## Functions
 
@@ -11,6 +23,8 @@
 ```ts
 function isBoolean(variable): boolean;
 ```
+
+Defined in: [main.ts:42](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L42)
 
 Checks if the given variable is a boolean.
 
@@ -26,10 +40,6 @@ Checks if the given variable is a boolean.
 
 True if the variable is a boolean, false otherwise.
 
-#### Defined in
-
-[main.ts:42](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L42)
-
 ---
 
 ### isNotBoolean()
@@ -37,6 +47,8 @@ True if the variable is a boolean, false otherwise.
 ```ts
 function isNotBoolean(variable): boolean;
 ```
+
+Defined in: [main.ts:51](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L51)
 
 Checks if the given variable is not a boolean.
 
@@ -52,10 +64,6 @@ Checks if the given variable is not a boolean.
 
 True if the variable is not a boolean, false otherwise.
 
-#### Defined in
-
-[main.ts:51](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L51)
-
 ---
 
 ### isNotNumber()
@@ -63,6 +71,8 @@ True if the variable is not a boolean, false otherwise.
 ```ts
 function isNotNumber(variable): boolean;
 ```
+
+Defined in: [main.ts:34](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L34)
 
 Checks if the given variable is not a number.
 
@@ -78,10 +88,6 @@ Checks if the given variable is not a number.
 
 True if the variable is not a number, false otherwise.
 
-#### Defined in
-
-[main.ts:34](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L34)
-
 ---
 
 ### isNotString()
@@ -89,6 +95,8 @@ True if the variable is not a number, false otherwise.
 ```ts
 function isNotString(variable): boolean;
 ```
+
+Defined in: [main.ts:17](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L17)
 
 Checks if the given variable is not a string.
 
@@ -104,10 +112,6 @@ Checks if the given variable is not a string.
 
 True if the variable is not a string, false otherwise.
 
-#### Defined in
-
-[main.ts:17](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L17)
-
 ---
 
 ### isNotUndefined()
@@ -115,6 +119,8 @@ True if the variable is not a string, false otherwise.
 ```ts
 function isNotUndefined(variable): boolean;
 ```
+
+Defined in: [main.ts:69](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L69)
 
 Checks if the given variable is not undefined.
 
@@ -130,10 +136,6 @@ Checks if the given variable is not undefined.
 
 True if the variable is not undefined, false otherwise.
 
-#### Defined in
-
-[main.ts:69](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L69)
-
 ---
 
 ### isNumber()
@@ -141,6 +143,8 @@ True if the variable is not undefined, false otherwise.
 ```ts
 function isNumber(variable): boolean;
 ```
+
+Defined in: [main.ts:25](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L25)
 
 Checks if the given variable is a number.
 
@@ -156,10 +160,6 @@ Checks if the given variable is a number.
 
 True if the variable is a number, false otherwise.
 
-#### Defined in
-
-[main.ts:25](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L25)
-
 ---
 
 ### isString()
@@ -167,6 +167,8 @@ True if the variable is a number, false otherwise.
 ```ts
 function isString(variable): boolean;
 ```
+
+Defined in: [main.ts:8](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L8)
 
 Checks if the given variable is a string.
 
@@ -182,10 +184,6 @@ Checks if the given variable is a string.
 
 True if the variable is a string, false otherwise.
 
-#### Defined in
-
-[main.ts:8](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L8)
-
 ---
 
 ### isUndefined()
@@ -193,6 +191,8 @@ True if the variable is a string, false otherwise.
 ```ts
 function isUndefined(variable): boolean;
 ```
+
+Defined in: [main.ts:60](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L60)
 
 Checks if the given variable is undefined.
 
@@ -207,10 +207,6 @@ Checks if the given variable is undefined.
 `boolean`
 
 True if the variable is undefined, false otherwise.
-
-#### Defined in
-
-[main.ts:60](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L60)
 
 ---
 
