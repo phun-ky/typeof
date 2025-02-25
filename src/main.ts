@@ -67,3 +67,195 @@ export const isUndefined = (variable: unknown): boolean =>
  */
 export const isNotUndefined = (variable: unknown): boolean =>
   !isUndefined(variable);
+
+/**
+ * Checks if a given value is a plain object.
+ *
+ * A plain object is an object created by the `{}` syntax, `Object.create(null)`,
+ * or using `new Object()`. This function ensures that the value is an object
+ * and does not have an unusual prototype chain.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} `true` if the value is a plain object, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * console.log(isObjectStrict({})); // Output: true
+ * console.log(isObjectStrict(Object.create(null))); // Output: true
+ * console.log(isObjectStrict([])); // Output: false
+ * console.log(isObjectStrict(new Date())); // Output: false
+ * console.log(isObjectStrict(null)); // Output: false
+ * ```
+ *
+ * **Features**
+ * - ✅ Recognizes only **plain objects** (created via `{}`, `new Object()`, `Object.create(null)`, etc.).
+ * - ❌ Rejects **arrays**, **functions**, **DOM elements**, **class instances**, and **custom objects** with modified constructors.
+ *
+ * **Behavior**
+ * - ✅ `isObjectStrict({})` → `true`
+ * - ❌ `isObjectStrict([])` → `false`
+ * - ❌ `isObjectStrict(() => {})` → `false`
+ * - ✅ `isObjectStrict(Object.create(null))` → `true`
+ *
+ * **When to use**
+ * - Use `isObjectStrict` when you need a **strict check for plain objects**.
+ * - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
+ */
+export const isObjectStrict = (value: unknown): boolean => {
+  if (typeof value !== 'object' || value === null) return false;
+
+  if (Object.prototype.toString.call(value) !== '[object Object]') return false;
+
+  const proto = Object.getPrototypeOf(value);
+
+  if (proto === null) return true;
+
+  const Ctor = Object.prototype.hasOwnProperty.call(proto, 'constructor')
+    ? proto.constructor
+    : null;
+
+  return (
+    typeof Ctor === 'function' &&
+    Ctor instanceof Ctor &&
+    Function.prototype.call(Ctor) === Function.prototype.call(value)
+  );
+};
+
+/**
+ * Checks if a given value is an object or a function.
+ *
+ * This function verifies whether the provided value is of type `'object'` or `'function'`
+ * while ensuring that `null` is excluded.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} `true` if the value is an object or function, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * console.log(isObjectLoose({})); // Output: true
+ * console.log(isObjectLoose([])); // Output: true
+ * console.log(isObjectLoose(() => {})); // Output: true
+ * console.log(isObjectLoose(null)); // Output: false
+ * console.log(isObjectLoose(42)); // Output: false
+ * ```
+ *
+ * **Features**
+ * - ✅ Recognizes **all objects** (plain objects, arrays, functions, dates, etc.).
+ * - ✅ Recognizes **functions** as objects (since functions are technically objects in JavaScript).
+ * - ❌ Does **not** differentiate between plain objects and special objects (like arrays, functions, DOM nodes, etc.).
+ *
+ * **Behavior**
+ * - ✅ `isObjectLoose({})` → `true`
+ * - ✅ `isObjectLoose([])` → `true`
+ * - ✅ `isObjectLoose(() => {})` → `true`
+ * - ❌ `isObjectLoose(null)` → `false`
+ *
+ * **When to use**
+ * - Use `isObjectStrict` when you need a **strict check for plain objects**.
+ * - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
+ *
+ * **Comparison**
+ * | Feature                | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
+ * |------------------------|----------------------|----------------------|
+ * | Recognizes plain objects | ✅ Yes | ✅ Yes |
+ * | Recognizes functions    | ❌ No | ✅ Yes |
+ * | Recognizes arrays       | ❌ No | ✅ Yes |
+ * | Recognizes `Object.create(null)` objects | ✅ Yes | ✅ Yes |
+ * | Recognizes class instances | ❌ No | ✅ Yes |
+ * | Recognizes DOM elements | ❌ No | ✅ Yes |
+ * | Complexity             | 🔴 High | 🟢 Low |
+ */
+export const isObjectLoose = (value: unknown): boolean => {
+  const type = typeof value;
+
+  return value !== null && (type === 'object' || type === 'function');
+};
+
+/**
+ * Checks if a given value is a class constructor.
+ *
+ * This function determines whether the provided value is a class by verifying
+ * if it is a function and checking its prototype descriptor. Class constructors
+ * always have a non-writable prototype, while regular functions do not.
+ *
+ * Will always return false on built in constructors like `Date` or `Array`.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} `true` if the value is a class constructor, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * class MyClass {}
+ * console.log(isClass(MyClass)); // Output: true
+ *
+ * function regularFunction() {}
+ * console.log(isClass(regularFunction)); // Output: false
+ *
+ * console.log(isClass(() => {})); // Output: false
+ * console.log(isClass(null)); // Output: false
+ * ```
+ */
+export const isClass = (value: unknown): boolean => {
+  if (typeof value !== 'function') return false;
+
+  if (isBuiltInConstructor(value)) return false;
+
+  try {
+    // Check if the function has a valid prototype (classes always do)
+    const descriptor = Object.getOwnPropertyDescriptor(value, 'prototype');
+
+    return !!descriptor && !descriptor.writable; // Class prototypes are non-writable
+  } catch {
+    return false;
+  }
+};
+
+/**
+ * Checks if a given value is a built-in JavaScript constructor.
+ *
+ * This function verifies whether the provided value is a function and matches
+ * one of JavaScript's built-in constructors, such as `Object`, `Array`, `Function`, etc.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} `true` if the value is a built-in constructor, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * console.log(isBuiltInConstructor(Object)); // Output: true
+ * console.log(isBuiltInConstructor(Array)); // Output: true
+ * console.log(isBuiltInConstructor(class MyClass {})); // Output: false
+ * console.log(isBuiltInConstructor(() => {})); // Output: false
+ * console.log(isBuiltInConstructor(123)); // Output: false
+ * ```
+ */
+export const isBuiltInConstructor = (value: unknown): boolean => {
+  if (typeof value !== 'function') return false;
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  const builtins: Function[] = [
+    Object,
+    Array,
+    Function,
+    String,
+    Number,
+    Boolean,
+    Date,
+    RegExp,
+    Error,
+    EvalError,
+    RangeError,
+    ReferenceError,
+    SyntaxError,
+    TypeError,
+    URIError,
+    Map,
+    WeakMap,
+    Set,
+    WeakSet,
+    Promise,
+    BigInt,
+    Symbol
+  ];
+
+  return builtins.includes(value);
+};

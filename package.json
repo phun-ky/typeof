@@ -42,8 +42,8 @@
     "style:format": "./node_modules/.bin/eslint -c ./eslint.config.mjs src  --fix && ./node_modules/.bin/prettier --write ./eslint.config.mjs src",
     "style:lint": "./node_modules/.bin/eslint -c ./eslint.config.mjs src && ./node_modules/.bin/prettier --check src",
     "test": "glob -c \"node --import tsx --import global-jsdom/register --test --no-warnings\" \"./src/**/__tests__/**/*.[jt]s\"",
-    "pretest-ci": "rm -rf coverage && mkdir -p coverage",
-    "test-ci": "glob -c \"node --import tsx --import global-jsdom/register --test --no-warnings --experimental-test-coverage --test-reporter=cobertura --test-reporter-destination=coverage/cobertura-coverage.xml --test-reporter=spec --test-reporter-destination=stdout\" \"./src/**/__tests__/**/*.[jt]s\""
+    "pretest:ci": "rm -rf coverage && mkdir -p coverage",
+    "test:ci": "glob -c \"node --import tsx --import global-jsdom/register --test --no-warnings --experimental-test-coverage --test-reporter=cobertura --test-reporter-destination=coverage/cobertura-coverage.xml --test-reporter=spec --test-reporter-destination=stdout\" \"./src/**/__tests__/**/*.[jt]s\""
   },
   "config": {
     "commitizen": {
