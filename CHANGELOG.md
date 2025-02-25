@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/phun-ky/typeof/compare/1.2.0...1.2.1) (2025-02-25)
+
+
+### Tasks
+
+* 🤖 Upgrade action ([182528d](https://github.com/phun-ky/typeof/commit/182528d35698cc094bc82722a0b33d7d9a5184b4))
+
 ## [1.2.0](https://github.com/phun-ky/typeof/compare/1.1.0...1.2.0) (2025-02-25)
 
 
