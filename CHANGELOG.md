@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/phun-ky/typeof/compare/1.0.4...1.1.0) (2025-02-25)
+
+
+### Tasks
+
+* 🤖 Upgrade to `eslint@v9` ([a413fd3](https://github.com/phun-ky/typeof/commit/a413fd34acd5982ae7f553003ac76e6a03c1a1c0))
+
+
+### Feature
+
+* 🎸 Add checks for class/constructor and objects ([555cab3](https://github.com/phun-ky/typeof/commit/555cab3a6cf5d31121222ec2a8f857b6f58779a0))
+
+
+### Bug
+
+* 🐛 Use correct script name. ([d14f466](https://github.com/phun-ky/typeof/commit/d14f4662e97fc4fd37d42d1364242e4d0be2bd7e)), closes [#20](https://github.com/phun-ky/typeof/issues/20)
+
 ## [1.0.4](https://github.com/phun-ky/typeof/compare/1.0.3...1.0.4) (2025-02-17)
 
 
