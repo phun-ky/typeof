@@ -15,7 +15,6 @@ export default [
       '**/node_modules',
       '**/coverage',
       '**/dist',
-      '**/__tests__',
       'tests/**',
       '**/__mocks__'
     ]
