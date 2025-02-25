@@ -13,7 +13,8 @@ import {
   isString,
   isUndefined,
   isClass,
-  isBuiltInConstructor
+  isBuiltInConstructor,
+  isInstanceOfUnknownClass
 } from '../main';
 
 describe('isString', () => {
@@ -298,5 +299,57 @@ describe('isBuiltInConstructor', () => {
     assert.strictEqual(isBuiltInConstructor([]), false);
     assert.strictEqual(isBuiltInConstructor({}), false);
     assert.strictEqual(isBuiltInConstructor(new Date()), false);
+  });
+});
+
+describe('isInstanceOfUnknownClass', () => {
+  it('returns true for instances of custom classes', () => {
+    class MyClass {}
+    class AnotherClass {}
+
+    assert.strictEqual(isInstanceOfUnknownClass(new MyClass()), true);
+    assert.strictEqual(isInstanceOfUnknownClass(new AnotherClass()), true);
+  });
+
+  it('returns true for built-in object-like structures with non-standard prototypes', () => {
+    assert.strictEqual(isInstanceOfUnknownClass([]), true); // Arrays have a prototype different from Object.prototype
+    assert.strictEqual(isInstanceOfUnknownClass(new Date()), true);
+    assert.strictEqual(isInstanceOfUnknownClass(new Map()), true);
+    assert.strictEqual(isInstanceOfUnknownClass(new Set()), true);
+    assert.strictEqual(isInstanceOfUnknownClass(new WeakMap()), true);
+    assert.strictEqual(isInstanceOfUnknownClass(new WeakSet()), true);
+    assert.strictEqual(isInstanceOfUnknownClass(new Error()), true);
+  });
+
+  it('returns false for plain objects', () => {
+    assert.strictEqual(isInstanceOfUnknownClass({}), false);
+  });
+
+  it('returns false for objects created with Object.create(null)', () => {
+    const nullPrototypeObject = Object.create(null);
+
+    assert.strictEqual(isInstanceOfUnknownClass(nullPrototypeObject), false);
+  });
+
+  it('returns false for primitive values', () => {
+    assert.strictEqual(isInstanceOfUnknownClass(null), false);
+    assert.strictEqual(isInstanceOfUnknownClass(undefined), false);
+    assert.strictEqual(isInstanceOfUnknownClass(42), false);
+    assert.strictEqual(isInstanceOfUnknownClass('hello'), false);
+    assert.strictEqual(isInstanceOfUnknownClass(true), false);
+    assert.strictEqual(isInstanceOfUnknownClass(Symbol('test')), false);
+    assert.strictEqual(isInstanceOfUnknownClass(BigInt(123)), false);
+  });
+
+  it('returns false for functions', () => {
+    function regularFunction() {}
+    class MyClass {}
+
+    assert.strictEqual(isInstanceOfUnknownClass(regularFunction), false);
+    assert.strictEqual(
+      isInstanceOfUnknownClass(() => {}),
+      false
+    );
+    assert.strictEqual(isInstanceOfUnknownClass(MyClass), false);
   });
 });

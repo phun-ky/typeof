@@ -259,3 +259,28 @@ export const isBuiltInConstructor = (value: unknown): boolean => {
 
   return builtins.includes(value);
 };
+
+/**
+ * Checks if a given value is an instance of a non-standard (unknown) class.
+ *
+ * This function determines whether the provided value is an object and has a prototype
+ * that is neither `Object.prototype` (standard object) nor `null` (no prototype).
+ * It helps differentiate between instances of custom classes and plain objects.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} `true` if the value is an instance of a non-standard class, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * class MyClass {}
+ * console.log(isInstanceOfUnknownClass(new MyClass())); // Output: true
+ * console.log(isInstanceOfUnknownClass({})); // Output: false
+ * console.log(isInstanceOfUnknownClass(Object.create(null))); // Output: false
+ * console.log(isInstanceOfUnknownClass([])); // Output: true
+ * ```
+ */
+export const isInstanceOfUnknownClass = (value: unknown): boolean =>
+  typeof value === 'object' &&
+  value !== null &&
+  Object.getPrototypeOf(value) !== Object.prototype &&
+  Object.getPrototypeOf(value) !== null;
