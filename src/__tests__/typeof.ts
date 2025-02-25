@@ -8,8 +8,12 @@ import {
   isNotString,
   isNotUndefined,
   isNumber,
+  isObjectLoose,
+  isObjectStrict,
   isString,
-  isUndefined
+  isUndefined,
+  isClass,
+  isBuiltInConstructor
 } from '../main';
 
 describe('isString', () => {
@@ -74,5 +78,225 @@ describe('isNotUndefined', () => {
     assert.equal(isNotUndefined(123), true);
     assert.equal(isNotUndefined('test'), true);
     assert.equal(isNotUndefined(true), true);
+  });
+});
+
+describe('isObjectStrict', () => {
+  // Test with plain objects
+  it('returns true for an empty object', () => {
+    assert.strictEqual(isObjectStrict({}), true);
+  });
+
+  it('returns true for an object created with Object.create(null)', () => {
+    assert.strictEqual(isObjectStrict(Object.create(null)), true);
+  });
+
+  it('returns true for an object created with new Object()', () => {
+    assert.strictEqual(isObjectStrict(new Object()), true);
+  });
+
+  // Test with non-object values
+  it('returns false for null', () => {
+    assert.strictEqual(isObjectStrict(null), false);
+  });
+
+  it('returns false for an array', () => {
+    assert.strictEqual(isObjectStrict([]), false);
+  });
+
+  it('returns false for a function', () => {
+    assert.strictEqual(
+      isObjectStrict(() => {}),
+      false
+    );
+  });
+
+  it('returns false for a Date instance', () => {
+    assert.strictEqual(isObjectStrict(new Date()), false);
+  });
+
+  it('returns false for a class instance', () => {
+    class TestClass {}
+    assert.strictEqual(isObjectStrict(new TestClass()), false);
+  });
+
+  // Test with objects having unusual prototypes
+  it('returns false for an object with a modified constructor', () => {
+    function CustomConstructor() {}
+
+    const obj = new CustomConstructor();
+
+    assert.strictEqual(isObjectStrict(obj), false);
+  });
+
+  it('returns false for an object with a prototype chain other than Object.prototype or null', () => {
+    const obj = Object.create({ a: 1 });
+
+    assert.strictEqual(isObjectStrict(obj), false);
+  });
+});
+
+describe('isObjectLoose', () => {
+  // Test with various object types
+  it('returns true for a plain object', () => {
+    assert.strictEqual(isObjectLoose({}), true);
+  });
+
+  it('returns true for an array', () => {
+    assert.strictEqual(isObjectLoose([]), true);
+  });
+
+  it('returns true for a function', () => {
+    assert.strictEqual(
+      isObjectLoose(() => {}),
+      true
+    );
+  });
+
+  it('returns true for a Date instance', () => {
+    assert.strictEqual(isObjectLoose(new Date()), true);
+  });
+
+  it('returns true for a class instance', () => {
+    class TestClass {}
+    assert.strictEqual(isObjectLoose(new TestClass()), true);
+  });
+
+  // Test with non-object values
+  it('returns false for null', () => {
+    assert.strictEqual(isObjectLoose(null), false);
+  });
+
+  it('returns false for a number', () => {
+    assert.strictEqual(isObjectLoose(42), false);
+  });
+
+  it('returns false for a string', () => {
+    assert.strictEqual(isObjectLoose('hello'), false);
+  });
+
+  it('returns false for a boolean', () => {
+    assert.strictEqual(isObjectLoose(true), false);
+  });
+});
+
+describe('isClass', () => {
+  it('returns true for class declarations', () => {
+    class MyClass {}
+    assert.strictEqual(isClass(MyClass), true);
+  });
+
+  it('returns true for class expressions', () => {
+    const MyClass = class {};
+
+    assert.strictEqual(isClass(MyClass), true);
+  });
+
+  it('returns false for regular functions', () => {
+    function regularFunction() {}
+    assert.strictEqual(isClass(regularFunction), false);
+  });
+
+  it('returns false for arrow functions', () => {
+    const arrowFunction = () => {};
+
+    assert.strictEqual(isClass(arrowFunction), false);
+  });
+
+  it('returns false for async functions', () => {
+    async function asyncFunction() {}
+    assert.strictEqual(isClass(asyncFunction), false);
+  });
+
+  it('returns false for generator functions', () => {
+    function* generatorFunction() {}
+    assert.strictEqual(isClass(generatorFunction), false);
+  });
+
+  it('returns false for built-in functions', () => {
+    assert.strictEqual(isClass(Math.max), false);
+    assert.strictEqual(isClass(Date), false);
+  });
+
+  it('returns false for primitive values', () => {
+    assert.strictEqual(isClass(42), false);
+    assert.strictEqual(isClass('hello'), false);
+    assert.strictEqual(isClass(true), false);
+    assert.strictEqual(isClass(Symbol('test')), false);
+    assert.strictEqual(isClass(BigInt(123)), false);
+    assert.strictEqual(isClass(undefined), false);
+    assert.strictEqual(isClass(null), false);
+  });
+
+  it('returns false for non-function objects', () => {
+    assert.strictEqual(isClass({}), false);
+    assert.strictEqual(isClass([]), false);
+    assert.strictEqual(isClass(new Date()), false);
+    assert.strictEqual(isClass(new Map()), false);
+    assert.strictEqual(isClass(new Set()), false);
+  });
+});
+
+describe('isBuiltInConstructor', () => {
+  it('returns true for built-in constructors', () => {
+    assert.strictEqual(isBuiltInConstructor(Object), true);
+    assert.strictEqual(isBuiltInConstructor(Array), true);
+    assert.strictEqual(isBuiltInConstructor(Function), true);
+    assert.strictEqual(isBuiltInConstructor(String), true);
+    assert.strictEqual(isBuiltInConstructor(Number), true);
+    assert.strictEqual(isBuiltInConstructor(Boolean), true);
+    assert.strictEqual(isBuiltInConstructor(Date), true);
+    assert.strictEqual(isBuiltInConstructor(RegExp), true);
+    assert.strictEqual(isBuiltInConstructor(Error), true);
+    assert.strictEqual(isBuiltInConstructor(EvalError), true);
+    assert.strictEqual(isBuiltInConstructor(RangeError), true);
+    assert.strictEqual(isBuiltInConstructor(ReferenceError), true);
+    assert.strictEqual(isBuiltInConstructor(SyntaxError), true);
+    assert.strictEqual(isBuiltInConstructor(TypeError), true);
+    assert.strictEqual(isBuiltInConstructor(URIError), true);
+    assert.strictEqual(isBuiltInConstructor(Map), true);
+    assert.strictEqual(isBuiltInConstructor(WeakMap), true);
+    assert.strictEqual(isBuiltInConstructor(Set), true);
+    assert.strictEqual(isBuiltInConstructor(WeakSet), true);
+    assert.strictEqual(isBuiltInConstructor(Promise), true);
+    assert.strictEqual(isBuiltInConstructor(BigInt), true);
+    assert.strictEqual(isBuiltInConstructor(Symbol), true);
+  });
+
+  it('returns false for custom classes', () => {
+    class MyClass {}
+    assert.strictEqual(isBuiltInConstructor(MyClass), false);
+  });
+
+  it('returns false for function expressions', () => {
+    const myFunc = function () {};
+
+    assert.strictEqual(isBuiltInConstructor(myFunc), false);
+  });
+
+  it('returns false for arrow functions', () => {
+    const arrowFunc = () => {};
+
+    assert.strictEqual(isBuiltInConstructor(arrowFunc), false);
+  });
+
+  it('returns false for async functions', () => {
+    async function asyncFunc() {}
+    assert.strictEqual(isBuiltInConstructor(asyncFunc), false);
+  });
+
+  it('returns false for generator functions', () => {
+    function* generatorFunc() {}
+    assert.strictEqual(isBuiltInConstructor(generatorFunc), false);
+  });
+
+  it('returns false for non-function values', () => {
+    assert.strictEqual(isBuiltInConstructor(null), false);
+    assert.strictEqual(isBuiltInConstructor(undefined), false);
+    assert.strictEqual(isBuiltInConstructor(123), false);
+    assert.strictEqual(isBuiltInConstructor('hello'), false);
+    assert.strictEqual(isBuiltInConstructor([]), false);
+    assert.strictEqual(isBuiltInConstructor({}), false);
+    assert.strictEqual(isBuiltInConstructor(new Date()), false);
   });
 });
