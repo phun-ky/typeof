@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2025-02-25T09:13:54.128Z
+> Last updated 2025-02-25T10:41:20.346Z
 
 ## Table of Contents
 
@@ -10,6 +10,7 @@
   - [isBoolean()](#isboolean)
   - [isBuiltInConstructor()](#isbuiltinconstructor)
   - [isClass()](#isclass)
+  - [isInstanceOfUnknownClass()](#isinstanceofunknownclass)
   - [isNotBoolean()](#isnotboolean)
   - [isNotNumber()](#isnotnumber)
   - [isNotString()](#isnotstring)
@@ -122,6 +123,44 @@ console.log(isClass(regularFunction)); // Output: false
 
 console.log(isClass(() => {})); // Output: false
 console.log(isClass(null)); // Output: false
+```
+
+---
+
+### isInstanceOfUnknownClass()
+
+```ts
+function isInstanceOfUnknownClass(value): boolean;
+```
+
+Defined in: [main.ts:282](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L282)
+
+Checks if a given value is an instance of a non-standard (unknown) class.
+
+This function determines whether the provided value is an object and has a prototype
+that is neither `Object.prototype` (standard object) nor `null` (no prototype).
+It helps differentiate between instances of custom classes and plain objects.
+
+#### Parameters
+
+| Parameter | Type      | Description         |
+| --------- | --------- | ------------------- |
+| `value`   | `unknown` | The value to check. |
+
+#### Returns
+
+`boolean`
+
+`true` if the value is an instance of a non-standard class, otherwise `false`.
+
+#### Example
+
+```ts
+class MyClass {}
+console.log(isInstanceOfUnknownClass(new MyClass())); // Output: true
+console.log(isInstanceOfUnknownClass({})); // Output: false
+console.log(isInstanceOfUnknownClass(Object.create(null))); // Output: false
+console.log(isInstanceOfUnknownClass([])); // Output: true
 ```
 
 ---
