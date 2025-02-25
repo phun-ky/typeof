@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/phun-ky/typeof/compare/1.1.0...1.2.0) (2025-02-25)
+
+
+### Feature
+
+* 🎸 Add `isInstanceOfUnknownClass` ([e42737f](https://github.com/phun-ky/typeof/commit/e42737fedeabc04c1a88c718b7be63b68cf0c77b))
+
 ## [1.1.0](https://github.com/phun-ky/typeof/compare/1.0.4...1.1.0) (2025-02-25)
 
 
