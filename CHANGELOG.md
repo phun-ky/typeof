@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/phun-ky/typeof/compare/1.2.1...1.2.2) (2025-02-26)
+
+
+### Tasks
+
+* 🤖 Support node v20 as well ([c31637c](https://github.com/phun-ky/typeof/commit/c31637c8a0152bdce1e02454c2d12eb7298e6924))
+
 ## [1.2.1](https://github.com/phun-ky/typeof/compare/1.2.0...1.2.1) (2025-02-25)
 
 
