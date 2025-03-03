@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/phun-ky/typeof/compare/1.2.2...1.2.3) (2025-03-03)
+
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 5 updates ([d7e72d7](https://github.com/phun-ky/typeof/commit/d7e72d7a7d70d26eefd4d1b734bb8aae983f309c))
+
 ## [1.2.2](https://github.com/phun-ky/typeof/compare/1.2.1...1.2.2) (2025-02-26)
 
 
