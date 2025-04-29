@@ -2,24 +2,7 @@
 
 ---
 
-> Last updated 2025-04-29T13:01:38.694Z
-
-## Table of Contents
-
-- [Functions](#functions)
-  - [isBoolean()](#isboolean)
-  - [isBuiltInConstructor()](#isbuiltinconstructor)
-  - [isClass()](#isclass)
-  - [isInstanceOfUnknownClass()](#isinstanceofunknownclass)
-  - [isNotBoolean()](#isnotboolean)
-  - [isNotNumber()](#isnotnumber)
-  - [isNotString()](#isnotstring)
-  - [isNotUndefined()](#isnotundefined)
-  - [isNumber()](#isnumber)
-  - [isObjectLoose()](#isobjectloose)
-  - [isObjectStrict()](#isobjectstrict)
-  - [isString()](#isstring)
-  - [isUndefined()](#isundefined)
+> Last updated 2025-04-29T13:07:10.524Z
 
 ## Functions
 
@@ -339,16 +322,15 @@ console.log(isObjectLoose(42)); // Output: false
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
 **Comparison**
-
-| Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
-| ---------------------------------------- | ------------------------------- | ----------------------------- |
-| Recognizes plain objects                 | ✅ Yes                          | ✅ Yes                        |
-| Recognizes functions                     | ❌ No                           | ✅ Yes                        |
-| Recognizes arrays                        | ❌ No                           | ✅ Yes                        |
-| Recognizes `Object.create(null)` objects | ✅ Yes                          | ✅ Yes                        |
-| Recognizes class instances               | ❌ No                           | ✅ Yes                        |
-| Recognizes DOM elements                  | ❌ No                           | ✅ Yes                        |
-| Complexity                               | 🔴 High                         | 🟢 Low                        |
+| Feature | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
+|------------------------|----------------------|----------------------|
+| Recognizes plain objects | ✅ Yes | ✅ Yes |
+| Recognizes functions | ❌ No | ✅ Yes |
+| Recognizes arrays | ❌ No | ✅ Yes |
+| Recognizes `Object.create(null)` objects | ✅ Yes | ✅ Yes |
+| Recognizes class instances | ❌ No | ✅ Yes |
+| Recognizes DOM elements | ❌ No | ✅ Yes |
+| Complexity | 🔴 High | 🟢 Low |
 
 ---
 

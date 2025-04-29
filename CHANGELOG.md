@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.7](https://github.com/phun-ky/typeof/compare/1.2.6...1.2.7) (2025-04-29)
+
+### Tasks
+
+* 🤖 bump the major-updates group across 1 directory with 3 updates ([7f6ebb6](https://github.com/phun-ky/typeof/commit/7f6ebb6deb29408d847be1144a665d4741785ff6))
+
 ## [1.2.6](https://github.com/phun-ky/typeof/compare/1.2.5...1.2.6) (2025-04-29)
 
 ### Tasks
