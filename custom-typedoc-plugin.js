@@ -33,15 +33,9 @@ The sponsorship is an unique opportunity to alleviate more hours for me to maint
 This project created by [Alexander Vassbotn Røyne-Helgesen](http://phun-ky.net) is licensed under a [MIT License](https://choosealicense.com/licenses/mit/).
 `;
 
-  app.renderer.markdownHooks.on(
-    'page.end',
-    () => footerText
-  );
+  app.renderer.markdownHooks.on('page.end', () => footerText);
 
-  app.renderer.markdownHooks.on(
-    'index.page.end',
-    () => footerText
-  );
+  app.renderer.markdownHooks.on('index.page.end', () => footerText);
 }
 
 class MyMarkdownTheme extends MarkdownTheme {

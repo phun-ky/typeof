@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2025-02-26T13:33:59.130Z
+> Last updated 2025-05-04T07:02:49.562Z
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@
 function isBoolean(variable): boolean;
 ```
 
-Defined in: [main.ts:41](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L41)
+Defined in: [main.ts:42](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L42)
 
 Checks if the given variable is a boolean.
 
@@ -53,7 +53,7 @@ True if the variable is a boolean, false otherwise.
 function isBuiltInConstructor(value): boolean;
 ```
 
-Defined in: [main.ts:231](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L231)
+Defined in: [main.ts:232](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L232)
 
 Checks if a given value is a built-in JavaScript constructor.
 
@@ -90,7 +90,7 @@ console.log(isBuiltInConstructor(123)); // Output: false
 function isClass(value): boolean;
 ```
 
-Defined in: [main.ts:198](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L198)
+Defined in: [main.ts:199](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L199)
 
 Checks if a given value is a class constructor.
 
@@ -133,7 +133,7 @@ console.log(isClass(null)); // Output: false
 function isInstanceOfUnknownClass(value): boolean;
 ```
 
-Defined in: [main.ts:282](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L282)
+Defined in: [main.ts:283](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L283)
 
 Checks if a given value is an instance of a non-standard (unknown) class.
 
@@ -171,7 +171,7 @@ console.log(isInstanceOfUnknownClass([])); // Output: true
 function isNotBoolean(variable): boolean;
 ```
 
-Defined in: [main.ts:50](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L50)
+Defined in: [main.ts:51](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L51)
 
 Checks if the given variable is not a boolean.
 
@@ -195,7 +195,7 @@ True if the variable is not a boolean, false otherwise.
 function isNotNumber(variable): boolean;
 ```
 
-Defined in: [main.ts:33](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L33)
+Defined in: [main.ts:34](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L34)
 
 Checks if the given variable is not a number.
 
@@ -219,7 +219,7 @@ True if the variable is not a number, false otherwise.
 function isNotString(variable): boolean;
 ```
 
-Defined in: [main.ts:16](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L16)
+Defined in: [main.ts:17](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L17)
 
 Checks if the given variable is not a string.
 
@@ -243,7 +243,7 @@ True if the variable is not a string, false otherwise.
 function isNotUndefined(variable): boolean;
 ```
 
-Defined in: [main.ts:68](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L68)
+Defined in: [main.ts:69](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L69)
 
 Checks if the given variable is not undefined.
 
@@ -267,7 +267,7 @@ True if the variable is not undefined, false otherwise.
 function isNumber(variable): boolean;
 ```
 
-Defined in: [main.ts:24](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L24)
+Defined in: [main.ts:25](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L25)
 
 Checks if the given variable is a number.
 
@@ -291,7 +291,7 @@ True if the variable is a number, false otherwise.
 function isObjectLoose(value): boolean;
 ```
 
-Defined in: [main.ts:168](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L168)
+Defined in: [main.ts:169](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L169)
 
 Checks if a given value is an object or a function.
 
@@ -358,7 +358,7 @@ console.log(isObjectLoose(42)); // Output: false
 function isObjectStrict(value): boolean;
 ```
 
-Defined in: [main.ts:104](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L104)
+Defined in: [main.ts:105](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L105)
 
 Checks if a given value is a plain object.
 
@@ -413,7 +413,7 @@ console.log(isObjectStrict(null)); // Output: false
 function isString(variable): boolean;
 ```
 
-Defined in: [main.ts:7](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L7)
+Defined in: [main.ts:8](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L8)
 
 Checks if the given variable is a string.
 
@@ -437,7 +437,7 @@ True if the variable is a string, false otherwise.
 function isUndefined(variable): boolean;
 ```
 
-Defined in: [main.ts:59](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L59)
+Defined in: [main.ts:60](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L60)
 
 Checks if the given variable is undefined.
 
