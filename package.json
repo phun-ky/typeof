@@ -39,8 +39,8 @@
     "rollup": "rollup -c",
     "rollup:dev": "rollup -c -w",
     "style:code": "npx putout src",
-    "style:format": "./node_modules/.bin/eslint -c ./eslint.config.mjs src  --fix && ./node_modules/.bin/prettier --write ./eslint.config.mjs src",
-    "style:lint": "./node_modules/.bin/eslint -c ./eslint.config.mjs src && ./node_modules/.bin/prettier --check src",
+    "style:format": "./node_modules/.bin/eslint -c ./eslint.config.mjs src/**/*.ts  --fix --no-warn-ignored && ./node_modules/.bin/prettier --write ./eslint.config.mjs src",
+    "style:lint": "./node_modules/.bin/eslint -c ./eslint.config.mjs src/**/*.ts --no-warn-ignored && ./node_modules/.bin/prettier --check src",
     "test": "glob -c \"node --import tsx --import global-jsdom/register --test --no-warnings\" \"./src/**/__tests__/**/*.[jt]s\"",
     "pretest:ci": "rm -rf coverage && mkdir -p coverage",
     "test:ci": "glob -c \"node --import tsx --import global-jsdom/register --test --no-warnings --experimental-test-coverage --test-reporter=cobertura --test-reporter-destination=coverage/cobertura-coverage.xml --test-reporter=spec --test-reporter-destination=stdout\" \"./src/**/__tests__/**/*.[jt]s\""
@@ -51,7 +51,7 @@
     }
   },
   "devDependencies": {
-    "@eslint/js": "^9.20.0",
+    "@phun-ky/eslint-config": "^0.1.9",
     "@release-it/conventional-changelog": "^10.0.0",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
@@ -60,11 +60,7 @@
     "@testing-library/jest-dom": "^6.4.2",
     "cobertura": "^1.0.1",
     "eslint": "^9.20.0",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-import-resolver-typescript": "^4.1.1",
-    "eslint-plugin-compat": "^6.0.2",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-config-prettier": "^10.1.2",
     "git-cz": "^4.9.0",
     "glob": "^11.0.1",
     "global-jsdom": "^26.0.0",
@@ -89,7 +85,6 @@
     "typedoc-plugin-remark": "^2.0.0",
     "typedoc-plugin-rename-defaults": "^0.7.1",
     "typescript": "^5.0.0",
-    "typescript-eslint": "^8.23.0",
     "unified-prettier": "^2.0.1"
   },
   "engines": {
