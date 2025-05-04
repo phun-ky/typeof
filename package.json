@@ -1,6 +1,6 @@
 {
   "name": "@phun-ky/typeof",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "A set of JavaScript helper functions to check for types",
   "keywords": [
     "types",

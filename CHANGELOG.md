@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.8](https://github.com/phun-ky/typeof/compare/1.2.7...1.2.8) (2025-05-04)
+
+### Documentation
+
+* ✏️ Update ([b2958aa](https://github.com/phun-ky/typeof/commit/b2958aae0fafa18bc0a45e93624732d45028d4d7))
+
 ## [1.2.7](https://github.com/phun-ky/typeof/compare/1.2.6...1.2.7) (2025-04-29)
 
 ### Tasks
