@@ -1,5 +1,36 @@
 # Changelog
 
+## [1.2.7](https://github.com/phun-ky/typeof/compare/1.2.6...1.2.7) (2025-04-29)
+
+### Tasks
+
+* 🤖 bump the major-updates group across 1 directory with 3 updates ([7f6ebb6](https://github.com/phun-ky/typeof/commit/7f6ebb6deb29408d847be1144a665d4741785ff6))
+
+## [1.2.6](https://github.com/phun-ky/typeof/compare/1.2.5...1.2.6) (2025-04-29)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 10 updates ([4c17eb6](https://github.com/phun-ky/typeof/commit/4c17eb63096e16ac4166fa21ad18c4b934d3a562))
+
+## [1.2.5](https://github.com/phun-ky/typeof/compare/1.2.4...1.2.5) (2025-04-15)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 16 updates ([752f3dc](https://github.com/phun-ky/typeof/commit/752f3dcb54e19f9f087ffd9804b11b2fb04588d0))
+
+## [1.2.4](https://github.com/phun-ky/typeof/compare/1.2.3...1.2.4) (2025-04-08)
+
+### Tasks
+
+* 🤖 bump the major-updates group across 1 directory with 11 updates ([6810bbe](https://github.com/phun-ky/typeof/commit/6810bbe9bc78c162827314e025073f7341326310))
+
+## [1.2.3](https://github.com/phun-ky/typeof/compare/1.2.2...1.2.3) (2025-03-03)
+
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 5 updates ([d7e72d7](https://github.com/phun-ky/typeof/commit/d7e72d7a7d70d26eefd4d1b734bb8aae983f309c))
+
 ## [1.2.2](https://github.com/phun-ky/typeof/compare/1.2.1...1.2.2) (2025-02-26)
 
 
