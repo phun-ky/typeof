@@ -8,7 +8,20 @@
     "number",
     "object",
     "javascript",
-    "typeof"
+    "typeof",
+    "isString",
+    "isNotString",
+    "isNumber",
+    "isNotNumber",
+    "isBoolean",
+    "isNotBoolean",
+    "isUndefined",
+    "isNotUndefined",
+    "isObjectStrict",
+    "isObjectLoose",
+    "isClass",
+    "isBuiltInConstructor",
+    "isInstanceOfUnknownClass"
   ],
   "homepage": "https://phun-ky.net/projects/typeof",
   "bugs": {

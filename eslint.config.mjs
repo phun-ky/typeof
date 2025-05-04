@@ -1,14 +1,9 @@
-import { defineConfig } from 'eslint/config';
+/* eslint-disable import/no-unused-modules */
 import customConfig from '@phun-ky/eslint-config';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
   {
-    files: ['**/*.js'],
-    extends: [customConfig],
-
-    // anything from here will override customConfig
-    rules: {
-      '@stylistic/no-extra-semi': '0'
-    }
+    extends: [customConfig]
   }
 ]);
