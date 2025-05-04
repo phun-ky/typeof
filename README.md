@@ -123,7 +123,7 @@ Checks if a given value is a class constructor.
 
 This function determines whether the provided value is a class by verifying
 if it is a function and checking its prototype descriptor. Class constructors
-always have a non-writable prototype, while regular functions do not.
+always have a non-writeable prototype, while regular functions do not.
 
 Will always return false on built in constructors like `Date` or `Array`.
 
@@ -347,25 +347,25 @@ console.log(isObjectLoose(null)); // Output: false
 console.log(isObjectLoose(42)); // Output: false
 ```
 
-**Features**
+##### Features
 
 - ✅ Recognizes **all objects** (plain objects, arrays, functions, dates, etc.).
 - ✅ Recognizes **functions** as objects (since functions are technically objects in JavaScript).
 - ❌ Does **not** differentiate between plain objects and special objects (like arrays, functions, DOM nodes, etc.).
 
-**Behavior**
+##### Behaviour
 
 - ✅ `isObjectLoose({})` → `true`
 - ✅ `isObjectLoose([])` → `true`
 - ✅ `isObjectLoose(() => {})` → `true`
 - ❌ `isObjectLoose(null)` → `false`
 
-**When to use**
+##### When to use
 
 - Use `isObjectStrict` when you need a **strict check for plain objects**.
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
-**Comparison**
+##### Comparison
 
 | Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
 | ---------------------------------------- | ------------------------------- | ----------------------------- |
@@ -415,19 +415,19 @@ console.log(isObjectStrict(new Date())); // Output: false
 console.log(isObjectStrict(null)); // Output: false
 ```
 
-**Features**
+##### Features
 
 - ✅ Recognizes only **plain objects** (created via `{}`, `new Object()`, `Object.create(null)`, etc.).
 - ❌ Rejects **arrays**, **functions**, **DOM elements**, **class instances**, and **custom objects** with modified constructors.
 
-**Behavior**
+##### Behaviour
 
 - ✅ `isObjectStrict({})` → `true`
 - ❌ `isObjectStrict([])` → `false`
 - ❌ `isObjectStrict(() => {})` → `false`
 - ✅ `isObjectStrict(Object.create(null))` → `true`
 
-**When to use**
+##### When to use
 
 - Use `isObjectStrict` when you need a **strict check for plain objects**.
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
@@ -484,7 +484,7 @@ True if the variable is undefined, false otherwise.
 
 ## Development
 
-```
+```shell-session
 // Build
 $ npm run build
 // Run dev
