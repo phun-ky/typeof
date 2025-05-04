@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.10](https://github.com/phun-ky/typeof/compare/1.2.9...1.2.10) (2025-05-04)
+
+### Tasks
+
+* 🤖 Add more tags ([8f90aa4](https://github.com/phun-ky/typeof/commit/8f90aa411b07dcbcfda087ced140d4032c14f955))
+* 🤖 update eslint-config ([066897d](https://github.com/phun-ky/typeof/commit/066897d08910d7046293da2a66faea7096fa2ade))
+
+### Documentation
+
+* ✏️ Typography fixes ([0885a88](https://github.com/phun-ky/typeof/commit/0885a88eca32c3aac312900b41a49cde2527e72a))
+
 ## [1.2.9](https://github.com/phun-ky/typeof/compare/1.2.8...1.2.9) (2025-05-04)
 
 ### Tasks
