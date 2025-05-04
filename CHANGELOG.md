@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.9](https://github.com/phun-ky/typeof/compare/1.2.8...1.2.9) (2025-05-04)
+
+### Tasks
+
+* 🤖 Add ESLint config from `@phun-ky/eslint-config` ([8963b92](https://github.com/phun-ky/typeof/commit/8963b9247ad7a7b67aef1d5a84939df3c9d893c8))
+
 ## [1.2.8](https://github.com/phun-ky/typeof/compare/1.2.7...1.2.8) (2025-05-04)
 
 ### Documentation
