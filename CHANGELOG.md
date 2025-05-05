@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.11](https://github.com/phun-ky/typeof/compare/1.2.10...1.2.11) (2025-05-05)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 2 updates ([3f36579](https://github.com/phun-ky/typeof/commit/3f36579c7461e8e2562982fa3571aead4a669ecd))
+* 🤖 Disable rules for markdown files ([b12bea7](https://github.com/phun-ky/typeof/commit/b12bea7b41023cb7482a4fb2e280385dcd8d9b0b))
+
 ## [1.2.10](https://github.com/phun-ky/typeof/compare/1.2.9...1.2.10) (2025-05-04)
 
 ### Tasks
