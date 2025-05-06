@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unused-modules */
-import customConfig from '@phun-ky/eslint-config';
 import { defineConfig } from 'eslint/config';
+import customConfig from 'eslint-config-phun-ky';
 
 export default defineConfig([
   {
