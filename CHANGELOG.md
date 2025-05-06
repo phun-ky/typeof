@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.12](https://github.com/phun-ky/typeof/compare/1.2.11...1.2.12) (2025-05-06)
+
+### Tasks
+
+* 🤖 Add new dep for eslint config ([96daac4](https://github.com/phun-ky/typeof/commit/96daac4f11ba28f16ef915de5c400a7d26ac208a))
+
 ## [1.2.11](https://github.com/phun-ky/typeof/compare/1.2.10...1.2.11) (2025-05-05)
 
 ### Tasks
