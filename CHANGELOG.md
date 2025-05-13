@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.2.13](https://github.com/phun-ky/typeof/compare/1.2.12...1.2.13) (2025-05-13)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 3 updates ([350df2c](https://github.com/phun-ky/typeof/commit/350df2c2f683ce7e44246084fbed6f409718f353))
+
+### Bug
+
+* 🐛 Give proper permission to workflow ([be06f4d](https://github.com/phun-ky/typeof/commit/be06f4d820564387905a5116f4219f8adf46fef8))
+* 🐛 Labels ([0d8d223](https://github.com/phun-ky/typeof/commit/0d8d2236320f197a395f8454ccf90be4170cfad2))
+
 ## [1.2.12](https://github.com/phun-ky/typeof/compare/1.2.11...1.2.12) (2025-05-06)
 
 ### Tasks
