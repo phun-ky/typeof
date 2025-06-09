@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.17](https://github.com/phun-ky/typeof/compare/1.2.16...1.2.17) (2025-06-09)
+
+### Tasks
+
+* 🤖 bump rollup from 4.41.1 to 4.42.0 in the minor-and-patch group ([05ad4bf](https://github.com/phun-ky/typeof/commit/05ad4bfee3c7a5468aad0e57464d4a32b2b2004a))
+
 ## [1.2.16](https://github.com/phun-ky/typeof/compare/1.2.15...1.2.16) (2025-06-02)
 
 ### Tasks
