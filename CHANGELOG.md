@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.22](https://github.com/phun-ky/typeof/compare/1.2.21...1.2.22) (2025-07-22)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 5 updates ([d32abe5](https://github.com/phun-ky/typeof/commit/d32abe511aef88ab9ae1b92a41a3c00285490d57))
+
 ## [1.2.21](https://github.com/phun-ky/typeof/compare/1.2.20...1.2.21) (2025-07-20)
 
 ### Tasks
