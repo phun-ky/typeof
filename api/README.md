@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2025-09-02T06:55:06.418Z
+> Last updated 2025-09-02T07:04:48.996Z
 
 ## Functions
 
@@ -79,7 +79,7 @@ Checks if a given value is a class constructor.
 
 This function determines whether the provided value is a class by verifying
 if it is a function and checking its prototype descriptor. Class constructors
-always have a non-writeable prototype, while regular functions do not.
+always have a non-writable prototype, while regular functions do not.
 
 Will always return false on built in constructors like `Date` or `Array`.
 
@@ -309,7 +309,7 @@ console.log(isObjectLoose(42)); // Output: false
 - ✅ Recognizes **functions** as objects (since functions are technically objects in JavaScript).
 - ❌ Does **not** differentiate between plain objects and special objects (like arrays, functions, DOM nodes, etc.).
 
-**Behaviour**
+**Behavior**
 
 - ✅ `isObjectLoose({})` → `true`
 - ✅ `isObjectLoose([])` → `true`
@@ -322,16 +322,15 @@ console.log(isObjectLoose(42)); // Output: false
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
 **Comparison**
-
-| Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
-| ---------------------------------------- | ------------------------------- | ----------------------------- |
-| Recognizes plain objects                 | ✅ Yes                           | ✅ Yes                         |
-| Recognizes functions                     | ❌ No                            | ✅ Yes                         |
-| Recognizes arrays                        | ❌ No                            | ✅ Yes                         |
-| Recognizes `Object.create(null)` objects | ✅ Yes                           | ✅ Yes                         |
-| Recognizes class instances               | ❌ No                            | ✅ Yes                         |
-| Recognizes DOM elements                  | ❌ No                            | ✅ Yes                         |
-| Complexity                               | 🔴 High                          | 🟢 Low                         |
+| Feature | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
+|------------------------|----------------------|----------------------|
+| Recognizes plain objects | ✅ Yes | ✅ Yes |
+| Recognizes functions | ❌ No | ✅ Yes |
+| Recognizes arrays | ❌ No | ✅ Yes |
+| Recognizes `Object.create(null)` objects | ✅ Yes | ✅ Yes |
+| Recognizes class instances | ❌ No | ✅ Yes |
+| Recognizes DOM elements | ❌ No | ✅ Yes |
+| Complexity | 🔴 High | 🟢 Low |
 
 ---
 
@@ -384,8 +383,8 @@ if (isObjectPlain(value)) {
 
 #### See
 
-- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/toString>
-- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/getPrototypeOf>
+- https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/toString
+- https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/getPrototypeOf
 
 ---
 
@@ -430,7 +429,7 @@ console.log(isObjectStrict(null)); // Output: false
 - ✅ Recognizes only **plain objects** (created via `{}`, `new Object()`, `Object.create(null)`, etc.).
 - ❌ Rejects **arrays**, **functions**, **DOM elements**, **class instances**, and **custom objects** with modified constructors.
 
-**Behaviour**
+**Behavior**
 
 - ✅ `isObjectStrict({})` → `true`
 - ❌ `isObjectStrict([])` → `false`

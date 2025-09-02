@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0](https://github.com/phun-ky/typeof/compare/1.2.27...1.3.0) (2025-09-02)
+
+### Tasks
+
+* 🤖 Install missing node types ([4315bc1](https://github.com/phun-ky/typeof/commit/4315bc14c04c99c157e3ae44ca9eaa6bfcd8e9be))
+
+### Feature
+
+* 🎸 Add `isObjectPlain` for checking plain objects ([a3c6a5f](https://github.com/phun-ky/typeof/commit/a3c6a5f24f96effeb00d8b4b8e88f0db7fd2074e))
+
 ## [1.2.27](https://github.com/phun-ky/typeof/compare/1.2.26...1.2.27) (2025-08-26)
 
 ### Tasks
