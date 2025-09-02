@@ -14,7 +14,8 @@ import {
   isUndefined,
   isClass,
   isBuiltInConstructor,
-  isInstanceOfUnknownClass
+  isInstanceOfUnknownClass,
+  isObjectPlain
 } from '../main';
 
 describe('isString', () => {
@@ -81,6 +82,117 @@ describe('isNotUndefined', () => {
     assert.equal(isNotUndefined(true), true);
   });
 });
+
+describe('isObjectPlain', () => {
+  // Plain objects
+  it('returns true for an empty object', () => {
+    assert.strictEqual(isObjectPlain({}), true);
+  });
+
+  it('returns true for an object created with Object.create(null)', () => {
+    assert.strictEqual(isObjectPlain(Object.create(null)), true);
+  });
+
+  it('returns true for an object created with new Object()', () => {
+    assert.strictEqual(isObjectPlain(new Object()), true);
+  });
+
+  it('returns true for a frozen plain object', () => {
+    const obj = Object.freeze({ a: 1 });
+    assert.strictEqual(isObjectPlain(obj), true);
+  });
+
+  it('returns true for a sealed plain object', () => {
+    const obj = Object.seal({ a: 1 });
+    assert.strictEqual(isObjectPlain(obj), true);
+  });
+
+  // Non-object values
+  it('returns false for null', () => {
+    assert.strictEqual(isObjectPlain(null as unknown), false);
+  });
+
+  it('returns false for an array', () => {
+    assert.strictEqual(isObjectPlain([]), false);
+  });
+
+  it('returns false for a function', () => {
+    assert.strictEqual(isObjectPlain(() => {}), false);
+  });
+
+  it('returns false for a Date instance', () => {
+    assert.strictEqual(isObjectPlain(new Date()), false);
+  });
+
+  it('returns false for a class instance', () => {
+    class TestClass {}
+    assert.strictEqual(isObjectPlain(new TestClass()), false);
+  });
+
+  it('returns false for Map/Set', () => {
+    assert.strictEqual(isObjectPlain(new Map()), false);
+    assert.strictEqual(isObjectPlain(new Set()), false);
+  });
+
+  it('returns false for RegExp', () => {
+    assert.strictEqual(isObjectPlain(/re/), false);
+    assert.strictEqual(isObjectPlain(new RegExp('re')), false);
+  });
+
+  it('returns false for Error', () => {
+    assert.strictEqual(isObjectPlain(new Error('x')), false);
+  });
+
+  it('returns false for Promise', () => {
+    assert.strictEqual(isObjectPlain(Promise.resolve(1)), false);
+  });
+
+  it('returns false for typed arrays', () => {
+    assert.strictEqual(isObjectPlain(new Uint8Array(2)), false);
+    assert.strictEqual(isObjectPlain(new Int16Array(2)), false);
+  });
+
+  it('returns false for boxed primitives', () => {
+    assert.strictEqual(isObjectPlain(new Number(1)), false);
+    assert.strictEqual(isObjectPlain(new String('a')), false);
+    assert.strictEqual(isObjectPlain(new Boolean(true)), false);
+    assert.strictEqual(isObjectPlain(Object(1)), false); // same as new Number(1)
+  });
+
+  // Unusual prototypes
+  it('returns false for an object constructed via a custom constructor', () => {
+    function CustomConstructor(this: any) {
+      this.x = 1;
+    }
+    CustomConstructor.prototype.y = 2;
+    const obj = new (CustomConstructor as any)();
+    assert.strictEqual(isObjectPlain(obj), false);
+  });
+
+  it('returns false for an object with a prototype other than Object.prototype or null', () => {
+    const obj = Object.create({ a: 1 });
+    assert.strictEqual(isObjectPlain(obj), false);
+  });
+
+  it('returns true for null-prototype objects even with properties', () => {
+    const obj = Object.create(null);
+    (obj as any).x = 1;
+    assert.strictEqual(isObjectPlain(obj), true);
+  });
+
+  it('returns false after changing a plain object prototype to a custom one', () => {
+    const base = { a: 1 };
+    const customProto = { p: true };
+    Object.setPrototypeOf(base, customProto);
+    assert.strictEqual(isObjectPlain(base), false);
+  });
+
+  it('returns true after setting a plain object prototype to null', () => {
+    const base = { a: 1 };
+    Object.setPrototypeOf(base, null);
+    assert.strictEqual(isObjectPlain(base), true);
+  });
+})
 
 describe('isObjectStrict', () => {
   // Test with plain objects

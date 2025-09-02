@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2025-08-26T10:08:19.594Z
+> Last updated 2025-09-02T06:55:06.418Z
 
 ## Functions
 
@@ -36,7 +36,7 @@ True if the variable is a boolean, false otherwise.
 function isBuiltInConstructor(value): boolean;
 ```
 
-Defined in: [main.ts:231](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L231)
+Defined in: [main.ts:273](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L273)
 
 Checks if a given value is a built-in JavaScript constructor.
 
@@ -73,13 +73,13 @@ console.log(isBuiltInConstructor(123)); // Output: false
 function isClass(value): boolean;
 ```
 
-Defined in: [main.ts:198](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L198)
+Defined in: [main.ts:240](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L240)
 
 Checks if a given value is a class constructor.
 
 This function determines whether the provided value is a class by verifying
 if it is a function and checking its prototype descriptor. Class constructors
-always have a non-writable prototype, while regular functions do not.
+always have a non-writeable prototype, while regular functions do not.
 
 Will always return false on built in constructors like `Date` or `Array`.
 
@@ -116,7 +116,7 @@ console.log(isClass(null)); // Output: false
 function isInstanceOfUnknownClass(value): boolean;
 ```
 
-Defined in: [main.ts:282](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L282)
+Defined in: [main.ts:324](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L324)
 
 Checks if a given value is an instance of a non-standard (unknown) class.
 
@@ -274,7 +274,7 @@ True if the variable is a number, false otherwise.
 function isObjectLoose(value): boolean;
 ```
 
-Defined in: [main.ts:168](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L168)
+Defined in: [main.ts:210](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L210)
 
 Checks if a given value is an object or a function.
 
@@ -309,7 +309,7 @@ console.log(isObjectLoose(42)); // Output: false
 - ✅ Recognizes **functions** as objects (since functions are technically objects in JavaScript).
 - ❌ Does **not** differentiate between plain objects and special objects (like arrays, functions, DOM nodes, etc.).
 
-**Behavior**
+**Behaviour**
 
 - ✅ `isObjectLoose({})` → `true`
 - ✅ `isObjectLoose([])` → `true`
@@ -322,15 +322,70 @@ console.log(isObjectLoose(42)); // Output: false
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
 **Comparison**
-| Feature | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
-|------------------------|----------------------|----------------------|
-| Recognizes plain objects | ✅ Yes | ✅ Yes |
-| Recognizes functions | ❌ No | ✅ Yes |
-| Recognizes arrays | ❌ No | ✅ Yes |
-| Recognizes `Object.create(null)` objects | ✅ Yes | ✅ Yes |
-| Recognizes class instances | ❌ No | ✅ Yes |
-| Recognizes DOM elements | ❌ No | ✅ Yes |
-| Complexity | 🔴 High | 🟢 Low |
+
+| Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
+| ---------------------------------------- | ------------------------------- | ----------------------------- |
+| Recognizes plain objects                 | ✅ Yes                           | ✅ Yes                         |
+| Recognizes functions                     | ❌ No                            | ✅ Yes                         |
+| Recognizes arrays                        | ❌ No                            | ✅ Yes                         |
+| Recognizes `Object.create(null)` objects | ✅ Yes                           | ✅ Yes                         |
+| Recognizes class instances               | ❌ No                            | ✅ Yes                         |
+| Recognizes DOM elements                  | ❌ No                            | ✅ Yes                         |
+| Complexity                               | 🔴 High                          | 🟢 Low                         |
+
+---
+
+### isObjectPlain()
+
+```ts
+function isObjectPlain(variable): boolean;
+```
+
+Defined in: [main.ts:104](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L104)
+
+Determines whether a value is a plain object (i.e., created via an object literal,
+`Object.create(null)`, or with `Object` as its prototype).
+
+This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
+and other exotic objects.
+
+#### Parameters
+
+| Parameter  | Type      | Description        |
+| ---------- | --------- | ------------------ |
+| `variable` | `unknown` | The value to test. |
+
+#### Returns
+
+`boolean`
+
+`true` if `variable` is a plain object, otherwise `false`.
+
+#### Example
+
+```ts
+const a: unknown = { x: 1 };
+const b: unknown = [];
+const c: unknown = new Date();
+const d: unknown = Object.create(null);
+
+isObjectPlain(a); // true
+isObjectPlain(b); // false (array)
+isObjectPlain(c); // false (built-in)
+isObjectPlain(d); // true (null prototype)
+
+// Type narrowing example:
+const value: unknown = { foo: 42 };
+if (isObjectPlain(value)) {
+  // value is now Record<string, unknown>
+  console.log(value.foo);
+}
+```
+
+#### See
+
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/toString>
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/getPrototypeOf>
 
 ---
 
@@ -340,7 +395,7 @@ console.log(isObjectLoose(42)); // Output: false
 function isObjectStrict(value): boolean;
 ```
 
-Defined in: [main.ts:104](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L104)
+Defined in: [main.ts:146](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L146)
 
 Checks if a given value is a plain object.
 
@@ -375,7 +430,7 @@ console.log(isObjectStrict(null)); // Output: false
 - ✅ Recognizes only **plain objects** (created via `{}`, `new Object()`, `Object.create(null)`, etc.).
 - ❌ Rejects **arrays**, **functions**, **DOM elements**, **class instances**, and **custom objects** with modified constructors.
 
-**Behavior**
+**Behaviour**
 
 - ✅ `isObjectStrict({})` → `true`
 - ❌ `isObjectStrict([])` → `false`
