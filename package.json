@@ -17,10 +17,12 @@
     "isNotBoolean",
     "isUndefined",
     "isNotUndefined",
+    "isDefined",
     "isObjectStrict",
     "isObjectLoose",
     "isClass",
     "isBuiltInConstructor",
+    "isBuiltInCallable",
     "isInstanceOfUnknownClass"
   ],
   "homepage": "https://phun-ky.net/projects/typeof",

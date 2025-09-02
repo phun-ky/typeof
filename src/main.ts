@@ -1,72 +1,195 @@
+/* eslint-disable import/no-unused-modules */
 /**
- * Checks if the given variable is a string.
- *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is a string, false otherwise.
+ * @overload
  */
-export const isString = (variable: unknown): boolean =>
-  typeof variable === 'string';
+export function isString(value: unknown): value is string;
 
 /**
- * Checks if the given variable is not a string.
- *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is not a string, false otherwise.
+ * @overload
  */
-export const isNotString = (variable: unknown): boolean => !isString(variable);
+export function isString(value: unknown): boolean;
 
 /**
- * Checks if the given variable is a number.
+ * Checks if the given value is a string.
  *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is a number, false otherwise.
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is a string, false otherwise.
  */
-export const isNumber = (variable: unknown): boolean =>
-  typeof variable === 'number';
+export function isString(value: unknown): boolean {
+  return typeof value === 'string';
+}
 
 /**
- * Checks if the given variable is not a number.
- *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is not a number, false otherwise.
+ * @overload
  */
-export const isNotNumber = (variable: unknown): boolean => !isNumber(variable);
+export function isNotString<T>(value: T): value is Exclude<T, string>;
 
 /**
- * Checks if the given variable is a boolean.
- *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is a boolean, false otherwise.
+ * @overload
  */
-export const isBoolean = (variable: unknown): boolean =>
-  typeof variable === 'boolean';
+export function isNotString(value: unknown): boolean;
 
 /**
- * Checks if the given variable is not a boolean.
+ * Checks if the given value is not a string.
  *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is not a boolean, false otherwise.
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is not a string, false otherwise.
  */
-export const isNotBoolean = (variable: unknown): boolean =>
-  !isBoolean(variable);
+export function isNotString(value: unknown): boolean {
+  return !isString(value);
+}
 
 /**
- * Checks if the given variable is undefined.
- *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is undefined, false otherwise.
+ * @overload
  */
-export const isUndefined = (variable: unknown): boolean =>
-  typeof variable === 'undefined';
+export function isNumber(value: unknown): value is number;
 
 /**
- * Checks if the given variable is not undefined.
- *
- * @param {unknown} variable - The variable to check.
- * @returns {boolean} True if the variable is not undefined, false otherwise.
+ * @overload
  */
-export const isNotUndefined = (variable: unknown): boolean =>
-  !isUndefined(variable);
+export function isNumber(value: unknown): boolean;
+
+/**
+ * Checks if the given value is a number.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is a number, false otherwise.
+ */
+export function isNumber(value: unknown): boolean {
+  return typeof value === 'number';
+}
+
+/**
+ * @overload
+ */
+export function isNotNumber<T>(value: T): value is Exclude<T, number>;
+
+/**
+ * @overload
+ */
+export function isNotNumber(value: unknown): boolean;
+
+/**
+ * Checks if the given value is not a number.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is not a number, false otherwise.
+ */
+export function isNotNumber(value: unknown): boolean {
+  return !isNumber(value);
+}
+
+/**
+ * @overload
+ */
+export function isBoolean(value: unknown): value is boolean;
+
+/**
+ * @overload
+ */
+export function isBoolean(value: unknown): boolean;
+
+/**
+ * Checks if the given value is a boolean.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is a boolean, false otherwise.
+ */
+export function isBoolean(value: unknown): boolean {
+  return typeof value === 'boolean';
+}
+
+/**
+ * @overload
+ */
+export function isNotBoolean<T>(value: T): value is Exclude<T, boolean>;
+
+/**
+ * @overload
+ */
+export function isNotBoolean(value: unknown): boolean;
+
+/**
+ * Checks if the given value is not a boolean.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is not a boolean, false otherwise.
+ */
+export function isNotBoolean(value: unknown): boolean {
+  return !isBoolean(value);
+}
+
+/**
+ * @overload
+ */
+export function isUndefined(value: unknown): value is undefined;
+
+/**
+ * @overload
+ */
+export function isUndefined(value: unknown): boolean;
+
+/**
+ * Checks if the given value is undefined.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is undefined, false otherwise.
+ */
+export function isUndefined(value: unknown): boolean {
+  return typeof value === 'undefined';
+}
+
+/**
+ * @overload
+ */
+export function isNotUndefined<T>(value: T): value is Exclude<T, undefined>;
+
+/**
+ * @overload
+ */
+export function isNotUndefined(value: unknown): boolean;
+
+/**
+ * Checks if the given value is not undefined.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is not undefined, false otherwise.
+ */
+export function isNotUndefined(value: unknown): boolean {
+  return !isUndefined(value);
+}
+
+/* node:coverage disable */
+/**
+ * @overload
+ */
+export function isDefined<T>(value: T): value is Exclude<T, undefined>;
+
+/**
+ * @overload
+ */
+export function isDefined(value: unknown): boolean;
+
+/**
+ * Copy of `isNotUndefined`
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} True if the value is defined, false otherwise.
+ */
+export function isDefined(value: unknown): boolean {
+  return !isUndefined(value);
+}
+/* node:coverage enable */
+
+/**
+ * @overload
+ */
+export function isObjectPlain(value: unknown): value is Record<string, unknown>;
+
+/**
+ * @overload
+ */
+export function isObjectPlain(value: unknown): boolean;
 
 /**
  * Determines whether a value is a plain object (i.e., created via an object literal,
@@ -75,8 +198,8 @@ export const isNotUndefined = (variable: unknown): boolean =>
  * This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
  * and other exotic objects.
  *
- * @param {unknown} variable - The value to test.
- * @returns {boolean} `true` if `variable` is a plain object, otherwise `false`.
+ * @param {unknown} value - The value to test.
+ * @returns {boolean} `true` if `value` is a plain object, otherwise `false`.
  *
  * @example
  * ```ts
@@ -101,14 +224,25 @@ export const isNotUndefined = (variable: unknown): boolean =>
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/toString
  * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
  */
-export const isObjectPlain = (variable: unknown): boolean => {
-  if (Object.prototype.toString.call(variable) !== '[object Object]')
-    return false;
+export function isObjectPlain(value: unknown): boolean {
+  if (Object.prototype.toString.call(value) !== '[object Object]') return false;
 
-  const proto = Object.getPrototypeOf(variable);
+  const proto = Object.getPrototypeOf(value);
 
   return proto === Object.prototype || proto === null;
-};
+}
+
+/**
+ * @overload
+ */
+export function isObjectStrict(
+  value: unknown
+): value is Record<string, unknown>;
+
+/**
+ * @overload
+ */
+export function isObjectStrict(value: unknown): boolean;
 
 /**
  * Checks if a given value is a plain object.
@@ -143,7 +277,7 @@ export const isObjectPlain = (variable: unknown): boolean => {
  * - Use `isObjectStrict` when you need a **strict check for plain objects**.
  * - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
  */
-export const isObjectStrict = (value: unknown): boolean => {
+export function isObjectStrict(value: unknown): boolean {
   if (typeof value !== 'object' || value === null) return false;
 
   if (Object.prototype.toString.call(value) !== '[object Object]') return false;
@@ -161,7 +295,17 @@ export const isObjectStrict = (value: unknown): boolean => {
     Ctor instanceof Ctor &&
     Function.prototype.call(Ctor) === Function.prototype.call(value)
   );
-};
+}
+
+/**
+ * @overload
+ */
+export function isObjectLoose(value: unknown): value is object;
+
+/**
+ * @overload
+ */
+export function isObjectLoose(value: unknown): boolean;
 
 /**
  * Checks if a given value is an object or a function.
@@ -207,11 +351,24 @@ export const isObjectStrict = (value: unknown): boolean => {
  * | Recognizes DOM elements | ❌ No | ✅ Yes |
  * | Complexity             | 🔴 High | 🟢 Low |
  */
-export const isObjectLoose = (value: unknown): boolean => {
+export function isObjectLoose(value: unknown): boolean {
   const type = typeof value;
 
   return value !== null && (type === 'object' || type === 'function');
-};
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type ClassCtor<T = any> = new (...args: any[]) => T;
+
+/**
+ * @overload
+ */
+export function isClass(value: unknown): value is ClassCtor;
+
+/**
+ * @overload
+ */
+export function isClass(value: unknown): boolean;
 
 /**
  * Checks if a given value is a class constructor.
@@ -237,7 +394,7 @@ export const isObjectLoose = (value: unknown): boolean => {
  * console.log(isClass(null)); // Output: false
  * ```
  */
-export const isClass = (value: unknown): boolean => {
+export function isClass(value: unknown): boolean {
   if (typeof value !== 'function') return false;
 
   if (isBuiltInConstructor(value)) return false;
@@ -250,7 +407,45 @@ export const isClass = (value: unknown): boolean => {
   } catch {
     return false;
   }
-};
+}
+
+/**
+ * A union of standard JavaScript **constructable** built-ins
+ * (e.g., `Object`, `Array`, `Date`, `Map`, etc.).
+ */
+export type BuiltInConstructor =
+  | ObjectConstructor
+  | ArrayConstructor
+  | FunctionConstructor
+  | StringConstructor
+  | NumberConstructor
+  | BooleanConstructor
+  | DateConstructor
+  | RegExpConstructor
+  | ErrorConstructor
+  | EvalErrorConstructor
+  | RangeErrorConstructor
+  | ReferenceErrorConstructor
+  | SyntaxErrorConstructor
+  | TypeErrorConstructor
+  | URIErrorConstructor
+  | MapConstructor
+  | WeakMapConstructor
+  | SetConstructor
+  | WeakSetConstructor
+  | PromiseConstructor;
+
+/**
+ * @overload
+ */
+export function isBuiltInConstructor(
+  value: unknown
+): value is BuiltInConstructor;
+
+/**
+ * @overload
+ */
+export function isBuiltInConstructor(value: unknown): boolean;
 
 /**
  * Checks if a given value is a built-in JavaScript constructor.
@@ -270,7 +465,7 @@ export const isClass = (value: unknown): boolean => {
  * console.log(isBuiltInConstructor(123)); // Output: false
  * ```
  */
-export const isBuiltInConstructor = (value: unknown): boolean => {
+export function isBuiltInConstructor(value: unknown): boolean {
   if (typeof value !== 'function') return false;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
@@ -294,13 +489,117 @@ export const isBuiltInConstructor = (value: unknown): boolean => {
     WeakMap,
     Set,
     WeakSet,
-    Promise,
-    BigInt,
-    Symbol
+    Promise
   ];
 
-  return builtins.includes(value);
-};
+  return builtins.includes(value as BuiltInConstructor);
+}
+
+/**
+ * Built-in globals that are **callable**:
+ * - All standard constructors (above)
+ * - Plus callable, **non-constructable** built-ins: `BigInt` and `Symbol`
+ */
+export type BuiltInCallable =
+  | BuiltInConstructor
+  | typeof BigInt
+  | typeof Symbol;
+
+/**
+ * Canonical set of built-in callables.
+ * Note: identity is **realm-specific** (different iframes/VMs have different
+ * constructor identities), so values from another realm won't match here.
+ */
+const BUILTIN_CALLABLES: ReadonlySet<BuiltInCallable> = new Set([
+  Object,
+  Array,
+  Function,
+  String,
+  Number,
+  Boolean,
+  Date,
+  RegExp,
+  Error,
+  EvalError,
+  RangeError,
+  ReferenceError,
+  SyntaxError,
+  TypeError,
+  URIError,
+  Map,
+  WeakMap,
+  Set,
+  WeakSet,
+  Promise,
+  BigInt,
+  Symbol
+]);
+
+/**
+ * @overload
+ */
+export function isBuiltInCallable(value: unknown): value is BuiltInCallable;
+
+/**
+ * @overload
+ */
+export function isBuiltInCallable(value: unknown): boolean;
+
+/**
+ * Checks if a given value is a **built-in JavaScript callable**.
+ *
+ * A built-in callable is either:
+ * - a standard **constructor** (e.g., `Object`, `Array`, `Date`, `Map`), or
+ * - a callable **non-constructable** built-in (`BigInt`, `Symbol`).
+ *
+ * This function first verifies the value is a function, then tests identity
+ * against a curated set of built-ins.
+ *
+ * Overloads:
+ * - **Predicate:** narrows the value to `BuiltInCallable` on success.
+ * - **Boolean:** usable in contexts that require a plain `(v) => boolean`.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {boolean} `true` if the value is a built-in callable, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * isBuiltInCallable(Object);       // true
+ * isBuiltInCallable(Array);        // true
+ * isBuiltInCallable(BigInt);       // true (callable but not a constructor)
+ * isBuiltInCallable(Symbol);       // true (callable but not a constructor)
+ * isBuiltInCallable(class X {});   // false
+ * isBuiltInCallable(() => {});     // false
+ * isBuiltInCallable(123);          // false
+ *
+ * // Type narrowing:
+ * declare const fn: unknown;
+ * if (isBuiltInCallable(fn)) {
+ *   // fn is now typed as BuiltInCallable
+ *   console.log(fn.name);
+ * }
+ * ```
+ *
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/BigInt
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+ */
+export function isBuiltInCallable(value: unknown): boolean {
+  return (
+    typeof value === 'function' &&
+    BUILTIN_CALLABLES.has(value as BuiltInCallable)
+  );
+}
+
+/**
+ * @overload
+ */
+export function isInstanceOfUnknownClass(value: unknown): value is object;
+
+/**
+ * @overload
+ */
+export function isInstanceOfUnknownClass(value: unknown): boolean;
 
 /**
  * Checks if a given value is an instance of a non-standard (unknown) class.
@@ -321,8 +620,11 @@ export const isBuiltInConstructor = (value: unknown): boolean => {
  * console.log(isInstanceOfUnknownClass([])); // Output: true
  * ```
  */
-export const isInstanceOfUnknownClass = (value: unknown): boolean =>
-  typeof value === 'object' &&
-  value !== null &&
-  Object.getPrototypeOf(value) !== Object.prototype &&
-  Object.getPrototypeOf(value) !== null;
+export function isInstanceOfUnknownClass(value: unknown): boolean {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    Object.getPrototypeOf(value) !== Object.prototype &&
+    Object.getPrototypeOf(value) !== null
+  );
+}

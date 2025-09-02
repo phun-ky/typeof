@@ -2,60 +2,200 @@
 
 ---
 
-> Last updated 2025-09-02T07:04:48.996Z
+> Last updated 2025-09-02T10:51:19.888Z
+
+## Type Aliases
+
+### BuiltInCallable
+
+```ts
+type BuiltInCallable = BuiltInConstructor | typeof BigInt | typeof Symbol;
+```
+
+Defined in: [main.ts:501](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L501)
+
+Built-in globals that are **callable**:
+
+- All standard constructors (above)
+- Plus callable, **non-constructable** built-ins: `BigInt` and `Symbol`
+
+---
+
+### BuiltInConstructor
+
+```ts
+type BuiltInConstructor =
+  | ObjectConstructor
+  | ArrayConstructor
+  | FunctionConstructor
+  | StringConstructor
+  | NumberConstructor
+  | BooleanConstructor
+  | DateConstructor
+  | RegExpConstructor
+  | ErrorConstructor
+  | EvalErrorConstructor
+  | RangeErrorConstructor
+  | ReferenceErrorConstructor
+  | SyntaxErrorConstructor
+  | TypeErrorConstructor
+  | URIErrorConstructor
+  | MapConstructor
+  | WeakMapConstructor
+  | SetConstructor
+  | WeakSetConstructor
+  | PromiseConstructor;
+```
+
+Defined in: [main.ts:414](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L414)
+
+A union of standard JavaScript **constructable** built-ins
+(e.g., `Object`, `Array`, `Date`, `Map`, etc.).
 
 ## Functions
 
 ### isBoolean()
 
+Checks if the given value is a boolean.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isBoolean(variable): boolean;
+function isBoolean(value): value is boolean;
 ```
 
-Defined in: [main.ts:41](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L41)
+Defined in: [main.ts:85](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L85)
 
-Checks if the given variable is a boolean.
+**Parameters**
 
-#### Parameters
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Returns**
 
-#### Returns
+`value is boolean`
+
+**Call Signature**
+
+```ts
+function isBoolean(value): boolean;
+```
+
+Defined in: [main.ts:90](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L90)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
 
-True if the variable is a boolean, false otherwise.
+---
+
+### isBuiltInCallable()
+
+Checks if a given value is a **built-in JavaScript callable**.
+
+A built-in callable is either:
+
+- a standard **constructor** (e.g., `Object`, `Array`, `Date`, `Map`), or
+- a callable **non-constructable** built-in (`BigInt`, `Symbol`).
+
+This function first verifies the value is a function, then tests identity
+against a curated set of built-ins.
+
+Overloads:
+
+- **Predicate:** narrows the value to `BuiltInCallable` on success.
+- **Boolean:** usable in contexts that require a plain `(v) => boolean`.
+
+**Param**
+
+The value to check.
+
+**Example**
+
+```ts
+isBuiltInCallable(Object); // true
+isBuiltInCallable(Array); // true
+isBuiltInCallable(BigInt); // true (callable but not a constructor)
+isBuiltInCallable(Symbol); // true (callable but not a constructor)
+isBuiltInCallable(class X {}); // false
+isBuiltInCallable(() => {}); // false
+isBuiltInCallable(123); // false
+
+// Type narrowing:
+declare const fn: unknown;
+if (isBuiltInCallable(fn)) {
+  // fn is now typed as BuiltInCallable
+  console.log(fn.name);
+}
+```
+
+#### See
+
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects>
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/BigInt>
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Symbol>
+
+**Call Signature**
+
+```ts
+function isBuiltInCallable(value): value is BuiltInCallable;
+```
+
+Defined in: [main.ts:539](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L539)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is BuiltInCallable`
+
+**Call Signature**
+
+```ts
+function isBuiltInCallable(value): boolean;
+```
+
+Defined in: [main.ts:544](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L544)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
 
 ---
 
 ### isBuiltInConstructor()
-
-```ts
-function isBuiltInConstructor(value): boolean;
-```
-
-Defined in: [main.ts:273](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L273)
 
 Checks if a given value is a built-in JavaScript constructor.
 
 This function verifies whether the provided value is a function and matches
 one of JavaScript's built-in constructors, such as `Object`, `Array`, `Function`, etc.
 
-#### Parameters
+**Param**
 
-| Parameter | Type      | Description         |
-| --------- | --------- | ------------------- |
-| `value`   | `unknown` | The value to check. |
+The value to check.
 
-#### Returns
-
-`boolean`
-
-`true` if the value is a built-in constructor, otherwise `false`.
-
-#### Example
+**Example**
 
 ```ts
 console.log(isBuiltInConstructor(Object)); // Output: true
@@ -65,37 +205,59 @@ console.log(isBuiltInConstructor(() => {})); // Output: false
 console.log(isBuiltInConstructor(123)); // Output: false
 ```
 
+**Call Signature**
+
+```ts
+function isBuiltInConstructor(value): value is BuiltInConstructor;
+```
+
+Defined in: [main.ts:439](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L439)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is BuiltInConstructor`
+
+**Call Signature**
+
+```ts
+function isBuiltInConstructor(value): boolean;
+```
+
+Defined in: [main.ts:446](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L446)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
+
 ---
 
 ### isClass()
-
-```ts
-function isClass(value): boolean;
-```
-
-Defined in: [main.ts:240](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L240)
 
 Checks if a given value is a class constructor.
 
 This function determines whether the provided value is a class by verifying
 if it is a function and checking its prototype descriptor. Class constructors
-always have a non-writable prototype, while regular functions do not.
+always have a non-writeable prototype, while regular functions do not.
 
 Will always return false on built in constructors like `Date` or `Array`.
 
-#### Parameters
+**Param**
 
-| Parameter | Type      | Description         |
-| --------- | --------- | ------------------- |
-| `value`   | `unknown` | The value to check. |
+The value to check.
 
-#### Returns
-
-`boolean`
-
-`true` if the value is a class constructor, otherwise `false`.
-
-#### Example
+**Example**
 
 ```ts
 class MyClass {}
@@ -108,15 +270,97 @@ console.log(isClass(() => {})); // Output: false
 console.log(isClass(null)); // Output: false
 ```
 
+**Call Signature**
+
+```ts
+function isClass(value): value is ClassCtor<any>;
+```
+
+Defined in: [main.ts:364](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L364)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is ClassCtor<any>`
+
+**Call Signature**
+
+```ts
+function isClass(value): boolean;
+```
+
+Defined in: [main.ts:369](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L369)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
+
+---
+
+### isDefined()
+
+Copy of `isNotUndefined`
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
+```ts
+function isDefined<T>(value): value is Exclude<T, undefined>;
+```
+
+Defined in: [main.ts:165](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L165)
+
+**Type Parameters**
+
+| Type Parameter |
+| -------------- |
+| `T`            |
+
+**Parameters**
+
+| Parameter | Type |
+| --------- | ---- |
+| `value`   | `T`  |
+
+**Returns**
+
+`value is Exclude<T, undefined>`
+
+**Call Signature**
+
+```ts
+function isDefined(value): boolean;
+```
+
+Defined in: [main.ts:170](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L170)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
+
 ---
 
 ### isInstanceOfUnknownClass()
-
-```ts
-function isInstanceOfUnknownClass(value): boolean;
-```
-
-Defined in: [main.ts:324](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L324)
 
 Checks if a given value is an instance of a non-standard (unknown) class.
 
@@ -124,19 +368,11 @@ This function determines whether the provided value is an object and has a proto
 that is neither `Object.prototype` (standard object) nor `null` (no prototype).
 It helps differentiate between instances of custom classes and plain objects.
 
-#### Parameters
+**Param**
 
-| Parameter | Type      | Description         |
-| --------- | --------- | ------------------- |
-| `value`   | `unknown` | The value to check. |
+The value to check.
 
-#### Returns
-
-`boolean`
-
-`true` if the value is an instance of a non-standard class, otherwise `false`.
-
-#### Example
+**Example**
 
 ```ts
 class MyClass {}
@@ -146,154 +382,310 @@ console.log(isInstanceOfUnknownClass(Object.create(null))); // Output: false
 console.log(isInstanceOfUnknownClass([])); // Output: true
 ```
 
+**Call Signature**
+
+```ts
+function isInstanceOfUnknownClass(value): value is object;
+```
+
+Defined in: [main.ts:595](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L595)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is object`
+
+**Call Signature**
+
+```ts
+function isInstanceOfUnknownClass(value): boolean;
+```
+
+Defined in: [main.ts:600](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L600)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
+
 ---
 
 ### isNotBoolean()
 
+Checks if the given value is not a boolean.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isNotBoolean(variable): boolean;
+function isNotBoolean<T>(value): value is Exclude<T, boolean>;
 ```
 
-Defined in: [main.ts:50](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L50)
+Defined in: [main.ts:105](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L105)
 
-Checks if the given variable is not a boolean.
+**Type Parameters**
 
-#### Parameters
+| Type Parameter |
+| -------------- |
+| `T`            |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Parameters**
 
-#### Returns
+| Parameter | Type |
+| --------- | ---- |
+| `value`   | `T`  |
+
+**Returns**
+
+`value is Exclude<T, boolean>`
+
+**Call Signature**
+
+```ts
+function isNotBoolean(value): boolean;
+```
+
+Defined in: [main.ts:110](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L110)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is not a boolean, false otherwise.
 
 ---
 
 ### isNotNumber()
 
+Checks if the given value is not a number.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isNotNumber(variable): boolean;
+function isNotNumber<T>(value): value is Exclude<T, number>;
 ```
 
-Defined in: [main.ts:33](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L33)
+Defined in: [main.ts:65](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L65)
 
-Checks if the given variable is not a number.
+**Type Parameters**
 
-#### Parameters
+| Type Parameter |
+| -------------- |
+| `T`            |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Parameters**
 
-#### Returns
+| Parameter | Type |
+| --------- | ---- |
+| `value`   | `T`  |
+
+**Returns**
+
+`value is Exclude<T, number>`
+
+**Call Signature**
+
+```ts
+function isNotNumber(value): boolean;
+```
+
+Defined in: [main.ts:70](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L70)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is not a number, false otherwise.
 
 ---
 
 ### isNotString()
 
+Checks if the given value is not a string.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isNotString(variable): boolean;
+function isNotString<T>(value): value is Exclude<T, string>;
 ```
 
-Defined in: [main.ts:16](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L16)
+Defined in: [main.ts:25](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L25)
 
-Checks if the given variable is not a string.
+**Type Parameters**
 
-#### Parameters
+| Type Parameter |
+| -------------- |
+| `T`            |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Parameters**
 
-#### Returns
+| Parameter | Type |
+| --------- | ---- |
+| `value`   | `T`  |
+
+**Returns**
+
+`value is Exclude<T, string>`
+
+**Call Signature**
+
+```ts
+function isNotString(value): boolean;
+```
+
+Defined in: [main.ts:30](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L30)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is not a string, false otherwise.
 
 ---
 
 ### isNotUndefined()
 
+Checks if the given value is not undefined.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isNotUndefined(variable): boolean;
+function isNotUndefined<T>(value): value is Exclude<T, undefined>;
 ```
 
-Defined in: [main.ts:68](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L68)
+Defined in: [main.ts:145](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L145)
 
-Checks if the given variable is not undefined.
+**Type Parameters**
 
-#### Parameters
+| Type Parameter |
+| -------------- |
+| `T`            |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Parameters**
 
-#### Returns
+| Parameter | Type |
+| --------- | ---- |
+| `value`   | `T`  |
+
+**Returns**
+
+`value is Exclude<T, undefined>`
+
+**Call Signature**
+
+```ts
+function isNotUndefined(value): boolean;
+```
+
+Defined in: [main.ts:150](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L150)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is not undefined, false otherwise.
 
 ---
 
 ### isNumber()
 
+Checks if the given value is a number.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isNumber(variable): boolean;
+function isNumber(value): value is number;
 ```
 
-Defined in: [main.ts:24](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L24)
+Defined in: [main.ts:45](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L45)
 
-Checks if the given variable is a number.
+**Parameters**
 
-#### Parameters
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Returns**
 
-#### Returns
+`value is number`
+
+**Call Signature**
+
+```ts
+function isNumber(value): boolean;
+```
+
+Defined in: [main.ts:50](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L50)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is a number, false otherwise.
 
 ---
 
 ### isObjectLoose()
-
-```ts
-function isObjectLoose(value): boolean;
-```
-
-Defined in: [main.ts:210](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L210)
 
 Checks if a given value is an object or a function.
 
 This function verifies whether the provided value is of type `'object'` or `'function'`
 while ensuring that `null` is excluded.
 
-#### Parameters
+**Param**
 
-| Parameter | Type      | Description         |
-| --------- | --------- | ------------------- |
-| `value`   | `unknown` | The value to check. |
+The value to check.
 
-#### Returns
-
-`boolean`
-
-`true` if the value is an object or function, otherwise `false`.
-
-#### Example
+**Example**
 
 ```ts
 console.log(isObjectLoose({})); // Output: true
@@ -309,7 +701,7 @@ console.log(isObjectLoose(42)); // Output: false
 - ✅ Recognizes **functions** as objects (since functions are technically objects in JavaScript).
 - ❌ Does **not** differentiate between plain objects and special objects (like arrays, functions, DOM nodes, etc.).
 
-**Behavior**
+**Behaviour**
 
 - ✅ `isObjectLoose({})` → `true`
 - ✅ `isObjectLoose([])` → `true`
@@ -322,25 +714,56 @@ console.log(isObjectLoose(42)); // Output: false
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
 **Comparison**
-| Feature | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
-|------------------------|----------------------|----------------------|
-| Recognizes plain objects | ✅ Yes | ✅ Yes |
-| Recognizes functions | ❌ No | ✅ Yes |
-| Recognizes arrays | ❌ No | ✅ Yes |
-| Recognizes `Object.create(null)` objects | ✅ Yes | ✅ Yes |
-| Recognizes class instances | ❌ No | ✅ Yes |
-| Recognizes DOM elements | ❌ No | ✅ Yes |
-| Complexity | 🔴 High | 🟢 Low |
+
+| Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
+| ---------------------------------------- | ------------------------------- | ----------------------------- |
+| Recognizes plain objects                 | ✅ Yes                           | ✅ Yes                         |
+| Recognizes functions                     | ❌ No                            | ✅ Yes                         |
+| Recognizes arrays                        | ❌ No                            | ✅ Yes                         |
+| Recognizes `Object.create(null)` objects | ✅ Yes                           | ✅ Yes                         |
+| Recognizes class instances               | ❌ No                            | ✅ Yes                         |
+| Recognizes DOM elements                  | ❌ No                            | ✅ Yes                         |
+| Complexity                               | 🔴 High                          | 🟢 Low                         |
+
+**Call Signature**
+
+```ts
+function isObjectLoose(value): value is object;
+```
+
+Defined in: [main.ts:301](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L301)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is object`
+
+**Call Signature**
+
+```ts
+function isObjectLoose(value): boolean;
+```
+
+Defined in: [main.ts:306](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L306)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
 
 ---
 
 ### isObjectPlain()
-
-```ts
-function isObjectPlain(variable): boolean;
-```
-
-Defined in: [main.ts:104](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L104)
 
 Determines whether a value is a plain object (i.e., created via an object literal,
 `Object.create(null)`, or with `Object` as its prototype).
@@ -348,19 +771,11 @@ Determines whether a value is a plain object (i.e., created via an object litera
 This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
 and other exotic objects.
 
-#### Parameters
+**Param**
 
-| Parameter  | Type      | Description        |
-| ---------- | --------- | ------------------ |
-| `variable` | `unknown` | The value to test. |
+The value to test.
 
-#### Returns
-
-`boolean`
-
-`true` if `variable` is a plain object, otherwise `false`.
-
-#### Example
+**Example**
 
 ```ts
 const a: unknown = { x: 1 };
@@ -383,18 +798,48 @@ if (isObjectPlain(value)) {
 
 #### See
 
-- https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/toString
-- https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/getPrototypeOf
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/toString>
+- <https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global\_Objects/Object/getPrototypeOf>
+
+**Call Signature**
+
+```ts
+function isObjectPlain(value): value is Record<string, unknown>;
+```
+
+Defined in: [main.ts:185](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L185)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is Record<string, unknown>`
+
+**Call Signature**
+
+```ts
+function isObjectPlain(value): boolean;
+```
+
+Defined in: [main.ts:190](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L190)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
 
 ---
 
 ### isObjectStrict()
-
-```ts
-function isObjectStrict(value): boolean;
-```
-
-Defined in: [main.ts:146](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L146)
 
 Checks if a given value is a plain object.
 
@@ -402,19 +847,11 @@ A plain object is an object created by the `{}` syntax, `Object.create(null)`,
 or using `new Object()`. This function ensures that the value is an object
 and does not have an unusual prototype chain.
 
-#### Parameters
+**Param**
 
-| Parameter | Type      | Description         |
-| --------- | --------- | ------------------- |
-| `value`   | `unknown` | The value to check. |
+The value to check.
 
-#### Returns
-
-`boolean`
-
-`true` if the value is a plain object, otherwise `false`.
-
-#### Example
+**Example**
 
 ```ts
 console.log(isObjectStrict({})); // Output: true
@@ -429,7 +866,7 @@ console.log(isObjectStrict(null)); // Output: false
 - ✅ Recognizes only **plain objects** (created via `{}`, `new Object()`, `Object.create(null)`, etc.).
 - ❌ Rejects **arrays**, **functions**, **DOM elements**, **class instances**, and **custom objects** with modified constructors.
 
-**Behavior**
+**Behaviour**
 
 - ✅ `isObjectStrict({})` → `true`
 - ❌ `isObjectStrict([])` → `false`
@@ -441,53 +878,133 @@ console.log(isObjectStrict(null)); // Output: false
 - Use `isObjectStrict` when you need a **strict check for plain objects**.
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
+**Call Signature**
+
+```ts
+function isObjectStrict(value): value is Record<string, unknown>;
+```
+
+Defined in: [main.ts:236](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L236)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`value is Record<string, unknown>`
+
+**Call Signature**
+
+```ts
+function isObjectStrict(value): boolean;
+```
+
+Defined in: [main.ts:243](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L243)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
+
+`boolean`
+
 ---
 
 ### isString()
 
+Checks if the given value is a string.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isString(variable): boolean;
+function isString(value): value is string;
 ```
 
-Defined in: [main.ts:7](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L7)
+Defined in: [main.ts:5](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L5)
 
-Checks if the given variable is a string.
+**Parameters**
 
-#### Parameters
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Returns**
 
-#### Returns
+`value is string`
+
+**Call Signature**
+
+```ts
+function isString(value): boolean;
+```
+
+Defined in: [main.ts:10](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L10)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is a string, false otherwise.
 
 ---
 
 ### isUndefined()
 
+Checks if the given value is undefined.
+
+**Param**
+
+The value to check.
+
+**Call Signature**
+
 ```ts
-function isUndefined(variable): boolean;
+function isUndefined(value): value is undefined;
 ```
 
-Defined in: [main.ts:59](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L59)
+Defined in: [main.ts:125](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L125)
 
-Checks if the given variable is undefined.
+**Parameters**
 
-#### Parameters
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
 
-| Parameter  | Type      | Description            |
-| ---------- | --------- | ---------------------- |
-| `variable` | `unknown` | The variable to check. |
+**Returns**
 
-#### Returns
+`value is undefined`
+
+**Call Signature**
+
+```ts
+function isUndefined(value): boolean;
+```
+
+Defined in: [main.ts:130](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L130)
+
+**Parameters**
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+**Returns**
 
 `boolean`
-
-True if the variable is undefined, false otherwise.
 
 ---
 
