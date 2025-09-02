@@ -69,6 +69,48 @@ export const isNotUndefined = (variable: unknown): boolean =>
   !isUndefined(variable);
 
 /**
+ * Determines whether a value is a plain object (i.e., created via an object literal,
+ * `Object.create(null)`, or with `Object` as its prototype).
+ *
+ * This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
+ * and other exotic objects.
+ *
+ * @param {unknown} variable - The value to test.
+ * @returns {boolean} `true` if `variable` is a plain object, otherwise `false`.
+ *
+ * @example
+ * ```ts
+ * const a: unknown = { x: 1 };
+ * const b: unknown = [];
+ * const c: unknown = new Date();
+ * const d: unknown = Object.create(null);
+ *
+ * isObjectPlain(a); // true
+ * isObjectPlain(b); // false (array)
+ * isObjectPlain(c); // false (built-in)
+ * isObjectPlain(d); // true (null prototype)
+ *
+ * // Type narrowing example:
+ * const value: unknown = { foo: 42 };
+ * if (isObjectPlain(value)) {
+ *   // value is now Record<string, unknown>
+ *   console.log(value.foo);
+ * }
+ * ```
+ *
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/toString
+ * @see https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf
+ */
+export const isObjectPlain = (variable: unknown): boolean => {
+  if (Object.prototype.toString.call(variable) !== '[object Object]')
+    return false;
+
+  const proto = Object.getPrototypeOf(variable);
+
+  return proto === Object.prototype || proto === null;
+};
+
+/**
  * Checks if a given value is a plain object.
  *
  * A plain object is an object created by the `{}` syntax, `Object.create(null)`,
