@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0](https://github.com/phun-ky/typeof/compare/1.3.0...2.0.0) (2025-09-02)
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 You can no longer use `isBuiltInConstructor` to check for `BigInt` or
+`Symbol`, use `isBuiltInCallable(BigInt) || isBuiltInCallable(Symbol)`
+instead.
+
+### Feature
+
+* 🎸 Add isBuiltInCallable, add type-guard overloads and refactor helpers to function declarations. ([ae2bffd](https://github.com/phun-ky/typeof/commit/ae2bffd13340a6d5fd667af8a5e37eeda1f9a751))
+
 ## [1.3.0](https://github.com/phun-ky/typeof/compare/1.2.27...1.3.0) (2025-09-02)
 
 ### Tasks
