@@ -15,7 +15,8 @@ import {
   isClass,
   isBuiltInConstructor,
   isInstanceOfUnknownClass,
-  isObjectPlain
+  isObjectPlain,
+  isBuiltInCallable
 } from '../main';
 
 describe('isString', () => {
@@ -372,8 +373,6 @@ describe('isBuiltInConstructor', () => {
     assert.strictEqual(isBuiltInConstructor(Set), true);
     assert.strictEqual(isBuiltInConstructor(WeakSet), true);
     assert.strictEqual(isBuiltInConstructor(Promise), true);
-    assert.strictEqual(isBuiltInConstructor(BigInt), true);
-    assert.strictEqual(isBuiltInConstructor(Symbol), true);
   });
 
   it('returns false for custom classes', () => {
@@ -411,6 +410,96 @@ describe('isBuiltInConstructor', () => {
     assert.strictEqual(isBuiltInConstructor([]), false);
     assert.strictEqual(isBuiltInConstructor({}), false);
     assert.strictEqual(isBuiltInConstructor(new Date()), false);
+  });
+});
+
+
+describe('isBuiltInCallable', () => {
+  describe('returns true for built-in constructors', () => {
+    it('Object, Array, Function, String, Number, Boolean', () => {
+      assert.equal(isBuiltInCallable(Object), true);
+      assert.equal(isBuiltInCallable(Array), true);
+      assert.equal(isBuiltInCallable(Function), true);
+      assert.equal(isBuiltInCallable(String), true);
+      assert.equal(isBuiltInCallable(Number), true);
+      assert.equal(isBuiltInCallable(Boolean), true);
+    });
+
+    it('Date, RegExp, Error family', () => {
+      assert.equal(isBuiltInCallable(Date), true);
+      assert.equal(isBuiltInCallable(RegExp), true);
+      assert.equal(isBuiltInCallable(Error), true);
+      assert.equal(isBuiltInCallable(EvalError), true);
+      assert.equal(isBuiltInCallable(RangeError), true);
+      assert.equal(isBuiltInCallable(ReferenceError), true);
+      assert.equal(isBuiltInCallable(SyntaxError), true);
+      assert.equal(isBuiltInCallable(TypeError), true);
+      assert.equal(isBuiltInCallable(URIError), true);
+    });
+
+    it('Collections: Map, WeakMap, Set, WeakSet, Promise', () => {
+      assert.equal(isBuiltInCallable(Map), true);
+      assert.equal(isBuiltInCallable(WeakMap), true);
+      assert.equal(isBuiltInCallable(Set), true);
+      assert.equal(isBuiltInCallable(WeakSet), true);
+      assert.equal(isBuiltInCallable(Promise), true);
+    });
+  });
+
+  describe('returns true for callable non-constructable built-ins', () => {
+    it('BigInt and Symbol', () => {
+      assert.equal(isBuiltInCallable(BigInt), true);
+      assert.equal(isBuiltInCallable(Symbol), true);
+    });
+  });
+
+  describe('returns false for userland functions/classes', () => {
+    it('class declarations and regular/arrow functions', () => {
+      class MyClass {}
+      function fn() {}
+      const arrow = () => {};
+      async function afn() {}
+      function* gfn() {}
+
+      assert.equal(isBuiltInCallable(MyClass), false);
+      assert.equal(isBuiltInCallable(fn), false);
+      assert.equal(isBuiltInCallable(arrow), false);
+      assert.equal(isBuiltInCallable(afn), false);
+      assert.equal(isBuiltInCallable(gfn), false);
+    });
+  });
+
+  describe('returns false for other built-in functions not in the set', () => {
+    it('Math.max, Date.now, Map.prototype.get', () => {
+      assert.equal(isBuiltInCallable(Math.max), false);
+      assert.equal(isBuiltInCallable(Date.now), false);
+      assert.equal(isBuiltInCallable(Map.prototype.get), false);
+    });
+  });
+
+  describe('returns false for wrapped/bound/proxied callables', () => {
+    it('bound Array and proxied Array', () => {
+      const boundArray = Array.bind(null);
+      const proxiedArray = new Proxy(Array, {});
+      assert.equal(isBuiltInCallable(boundArray), false);
+      assert.equal(isBuiltInCallable(proxiedArray), false);
+    });
+  });
+
+  describe('returns false for non-function values', () => {
+    it('primitives and objects', () => {
+      assert.equal(isBuiltInCallable(123 as unknown), false);
+      assert.equal(isBuiltInCallable('abc' as unknown), false);
+      assert.equal(isBuiltInCallable(true as unknown), false);
+      assert.equal(isBuiltInCallable(null as unknown), false);
+      assert.equal(isBuiltInCallable(undefined as unknown), false);
+      assert.equal(isBuiltInCallable(Symbol('x') as unknown), false);
+      assert.equal(isBuiltInCallable(10n as unknown), false);
+      assert.equal(isBuiltInCallable({} as unknown), false);
+      assert.equal(isBuiltInCallable([] as unknown), false);
+      assert.equal(isBuiltInCallable(new Date() as unknown), false);
+      assert.equal(isBuiltInCallable(new Map() as unknown), false);
+    });
   });
 });
 

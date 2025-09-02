@@ -11,6 +11,7 @@
   "tsconfig": "tsconfig.json",
   "outputFileStrategy": "modules",
   "interfacePropertiesFormat": "table",
+  "excludeInternal": true,
   "classPropertiesFormat": "table",
   "enumMembersFormat": "table",
   "typeDeclarationFormat": "htmlTable",
