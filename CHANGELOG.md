@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.5](https://github.com/phun-ky/typeof/compare/2.0.4...2.0.5) (2025-09-30)
+
+### Tasks
+
+* 🤖 bump the major-updates group with 2 updates ([6930f6b](https://github.com/phun-ky/typeof/commit/6930f6b062be9c2146c15933e8d90c796e7de438))
+
 ## [2.0.4](https://github.com/phun-ky/typeof/compare/2.0.3...2.0.4) (2025-09-23)
 
 ### Tasks
