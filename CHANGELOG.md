@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.6](https://github.com/phun-ky/typeof/compare/2.0.5...2.0.6) (2025-09-30)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group across 1 directory with 4 updates ([b2f785d](https://github.com/phun-ky/typeof/commit/b2f785d0682b55c1d0963a10544f5b04c5c6ee23))
+
 ## [2.0.5](https://github.com/phun-ky/typeof/compare/2.0.4...2.0.5) (2025-09-30)
 
 ### Tasks
