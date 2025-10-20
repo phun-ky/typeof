@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.8](https://github.com/phun-ky/typeof/compare/2.0.7...2.0.8) (2025-10-20)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 9 updates ([22d85f3](https://github.com/phun-ky/typeof/commit/22d85f32fe134ce4fcd3b3e92b8c46acfd1fbf25))
+* 🤖 make sure we can publish ([13da79b](https://github.com/phun-ky/typeof/commit/13da79b565e14ac85b6477e597020dd3c8e97d11))
+
 ## [2.0.7](https://github.com/phun-ky/typeof/compare/2.0.6...2.0.7) (2025-10-07)
 
 ### Tasks
