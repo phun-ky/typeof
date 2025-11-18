@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.0.12](///compare/2.0.11...2.0.12) (2025-11-18)
+
 ## [2.0.11](https://github.com/phun-ky/typeof/compare/2.0.10...2.0.11) (2025-11-13)
 
 ### Tasks
