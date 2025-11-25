@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2025-11-18T07:45:33.576Z
+> Last updated 2025-11-25T09:42:07.593Z
 
 ## Type Aliases
 
