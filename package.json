@@ -49,7 +49,7 @@
     "clean": "rm -rf dist dts",
     "commit": "npx git-cz",
     "docs:gen": "node ./node_modules/.bin/typedoc",
-    "release": "release-it",
+    "release": "npx release-it --ci",
     "rollup": "rollup -c",
     "prerollup:dev": "npm run clean",
     "rollup:dev": "rollup -c -w",
