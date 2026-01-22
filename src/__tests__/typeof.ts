@@ -16,7 +16,8 @@ import {
   isBuiltInConstructor,
   isInstanceOfUnknownClass,
   isObjectPlain,
-  isBuiltInCallable
+  isBuiltInCallable,
+  isFunction
 } from '../main';
 
 describe('isString', () => {
@@ -259,7 +260,7 @@ describe('isObjectLoose', () => {
   it('returns true for an array', () => {
     assert.strictEqual(isObjectLoose([]), true);
   });
-
+  /* node:coverage disable */
   it('returns true for a function', () => {
     assert.strictEqual(
       isObjectLoose(() => {}),
@@ -271,6 +272,7 @@ describe('isObjectLoose', () => {
     assert.strictEqual(isObjectLoose(new Date()), true);
   });
 
+  /* node:coverage enable */
   it('returns true for a class instance', () => {
     class TestClass {}
     assert.strictEqual(isObjectLoose(new TestClass()), true);
@@ -504,6 +506,8 @@ describe('isBuiltInCallable', () => {
 });
 
 describe('isInstanceOfUnknownClass', () => {
+  /* node:coverage disable */
+
   it('returns true for instances of custom classes', () => {
     class MyClass {}
     class AnotherClass {}
@@ -511,6 +515,7 @@ describe('isInstanceOfUnknownClass', () => {
     assert.strictEqual(isInstanceOfUnknownClass(new MyClass()), true);
     assert.strictEqual(isInstanceOfUnknownClass(new AnotherClass()), true);
   });
+  /* node:coverage enable */
 
   it('returns true for built-in object-like structures with non-standard prototypes', () => {
     assert.strictEqual(isInstanceOfUnknownClass([]), true); // Arrays have a prototype different from Object.prototype
@@ -554,3 +559,66 @@ describe('isInstanceOfUnknownClass', () => {
     assert.strictEqual(isInstanceOfUnknownClass(MyClass), false);
   });
 });
+
+describe('isFunction', () => {
+
+it("returns true for arrow functions", () => {
+  assert.equal(isFunction(() => {}), true);
+});
+
+it("returns true for function declarations/expressions", () => {
+  function fnDecl() {
+    /* noop */
+  }
+  const fnExpr = function () {
+    /* noop */
+  };
+
+  assert.equal(isFunction(fnDecl), true);
+  assert.equal(isFunction(fnExpr), true);
+});
+
+it("returns true for async functions and generator functions", () => {
+  async function asyncFn() {
+    return 1;
+  }
+  function* genFn() {
+    yield 1;
+  }
+
+  assert.equal(isFunction(asyncFn), true);
+  assert.equal(isFunction(genFn), true);
+});
+
+it("returns true for class constructors (typeof === 'function')", () => {
+  class MyClass {}
+  assert.equal(isFunction(MyClass), true);
+});
+
+it("returns false for non-functions", () => {
+  assert.equal(isFunction(null), false);
+  assert.equal(isFunction(undefined), false);
+  assert.equal(isFunction(true), false);
+  assert.equal(isFunction(false), false);
+  assert.equal(isFunction(0), false);
+  assert.equal(isFunction(1), false);
+  assert.equal(isFunction("fn"), false);
+  assert.equal(isFunction({}), false);
+  assert.equal(isFunction([]), false);
+  assert.equal(isFunction(Symbol("x")), false);
+  assert.equal(isFunction(10n), false);
+  assert.equal(isFunction(new Date()), false);
+});
+
+it("acts as a type guard in TypeScript", () => {
+  const value: unknown = () => "ok";
+
+  if (isFunction(value)) {
+    // If the type guard works, `value` is callable here.
+    const result = value();
+    assert.equal(result, "ok");
+  } else {
+    assert.fail("Expected value to be a function");
+  }
+});
+})

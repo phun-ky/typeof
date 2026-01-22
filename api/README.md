@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2026-01-21T08:58:06.505Z
+> Last updated 2026-01-22T08:50:41.990Z
 
 ## Type Aliases
 
@@ -347,6 +347,52 @@ function isDefined(value): boolean;
 ```
 
 Defined in: [main.ts:171](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L171)
+
+##### Parameters
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+##### Returns
+
+`boolean`
+
+---
+
+### isFunction()
+
+Checks if the given value is a function.
+
+#### Param
+
+The value to check.
+
+#### Call Signature
+
+```ts
+function isFunction(value): value is (args: unknown[]) => unknown;
+```
+
+Defined in: [main.ts:635](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L635)
+
+##### Parameters
+
+| Parameter | Type      |
+| --------- | --------- |
+| `value`   | `unknown` |
+
+##### Returns
+
+`value is (args: unknown[]) => unknown`
+
+#### Call Signature
+
+```ts
+function isFunction(value): boolean;
+```
+
+Defined in: [main.ts:642](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L642)
 
 ##### Parameters
 
