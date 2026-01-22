@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2026-01-22T08:50:41.990Z
+> Last updated 2026-01-22T08:58:46.599Z
 
 ## Type Aliases
 
@@ -12,7 +12,7 @@
 type BuiltInCallable = BuiltInConstructor | typeof BigInt | typeof Symbol;
 ```
 
-Defined in: [main.ts:503](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L503)
+Defined in: [main.ts:505](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L505)
 
 Built-in globals that are **callable**:
 
@@ -47,7 +47,7 @@ type BuiltInConstructor =
   | PromiseConstructor;
 ```
 
-Defined in: [main.ts:416](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L416)
+Defined in: [main.ts:418](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L418)
 
 A union of standard JavaScript **constructable** built-ins
 (e.g., `Object`, `Array`, `Date`, `Map`, etc.).
@@ -152,7 +152,7 @@ if (isBuiltInCallable(fn)) {
 function isBuiltInCallable(value): value is BuiltInCallable;
 ```
 
-Defined in: [main.ts:541](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L541)
+Defined in: [main.ts:545](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L545)
 
 ##### Parameters
 
@@ -170,7 +170,7 @@ Defined in: [main.ts:541](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isBuiltInCallable(value): boolean;
 ```
 
-Defined in: [main.ts:546](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L546)
+Defined in: [main.ts:550](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L550)
 
 ##### Parameters
 
@@ -211,7 +211,7 @@ console.log(isBuiltInConstructor(123)); // Output: false
 function isBuiltInConstructor(value): value is BuiltInConstructor;
 ```
 
-Defined in: [main.ts:441](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L441)
+Defined in: [main.ts:443](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L443)
 
 ##### Parameters
 
@@ -229,7 +229,7 @@ Defined in: [main.ts:441](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isBuiltInConstructor(value): boolean;
 ```
 
-Defined in: [main.ts:448](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L448)
+Defined in: [main.ts:450](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L450)
 
 ##### Parameters
 
@@ -276,7 +276,7 @@ console.log(isClass(null)); // Output: false
 function isClass(value): value is ClassCtor<any>;
 ```
 
-Defined in: [main.ts:366](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L366)
+Defined in: [main.ts:368](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L368)
 
 ##### Parameters
 
@@ -294,7 +294,7 @@ Defined in: [main.ts:366](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isClass(value): boolean;
 ```
 
-Defined in: [main.ts:371](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L371)
+Defined in: [main.ts:373](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L373)
 
 ##### Parameters
 
@@ -374,7 +374,7 @@ The value to check.
 function isFunction(value): value is (args: unknown[]) => unknown;
 ```
 
-Defined in: [main.ts:635](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L635)
+Defined in: [main.ts:639](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L639)
 
 ##### Parameters
 
@@ -392,7 +392,7 @@ Defined in: [main.ts:635](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isFunction(value): boolean;
 ```
 
-Defined in: [main.ts:642](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L642)
+Defined in: [main.ts:646](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L646)
 
 ##### Parameters
 
@@ -434,7 +434,7 @@ console.log(isInstanceOfUnknownClass([])); // Output: true
 function isInstanceOfUnknownClass(value): value is object;
 ```
 
-Defined in: [main.ts:597](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L597)
+Defined in: [main.ts:601](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L601)
 
 ##### Parameters
 
@@ -452,7 +452,7 @@ Defined in: [main.ts:597](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isInstanceOfUnknownClass(value): boolean;
 ```
 
-Defined in: [main.ts:602](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L602)
+Defined in: [main.ts:606](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L606)
 
 ##### Parameters
 
@@ -776,7 +776,7 @@ console.log(isObjectLoose(42)); // Output: false
 function isObjectLoose(value): value is object;
 ```
 
-Defined in: [main.ts:303](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L303)
+Defined in: [main.ts:305](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L305)
 
 ##### Parameters
 
@@ -794,7 +794,7 @@ Defined in: [main.ts:303](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isObjectLoose(value): boolean;
 ```
 
-Defined in: [main.ts:308](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L308)
+Defined in: [main.ts:310](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L310)
 
 ##### Parameters
 

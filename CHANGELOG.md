@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.0](https://github.com/phun-ky/typeof/compare/2.0.19...2.1.0) (2026-01-22)
+
+### Tasks
+
+* 🤖 Reinstall deps ([1025783](https://github.com/phun-ky/typeof/commit/1025783fae24399c85da758e046b884111fb91de))
+
+### Feature
+
+* 🎸 Add `isFunction` ([0ce4391](https://github.com/phun-ky/typeof/commit/0ce43916b8320d61179d64762a250572eb8d7859))
+
 ## [2.0.19](https://github.com/phun-ky/typeof/compare/2.0.18...2.0.19) (2026-01-21)
 
 ### Tasks
