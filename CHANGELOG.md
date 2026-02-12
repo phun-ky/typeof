@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.2](https://github.com/phun-ky/typeof/compare/2.1.1...2.1.2) (2026-02-12)
+
+### Tasks
+
+* 🤖 bump the major-updates group across 1 directory with 2 updates ([4839465](https://github.com/phun-ky/typeof/commit/483946510fddbd8df83ed02f53f6196d2d582184))
+
 ## [2.1.1](https://github.com/phun-ky/typeof/compare/2.1.0...2.1.1) (2026-01-27)
 
 ### Tasks
