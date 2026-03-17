@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.7](https://github.com/phun-ky/typeof/compare/2.1.6...2.1.7) (2026-03-17)
+
+### Tasks
+
+* 🤖 bump the major-updates group with 2 updates ([ef59240](https://github.com/phun-ky/typeof/commit/ef59240e9c073270082c6b337582c3162861aa1b))
+
 ## [2.1.6](https://github.com/phun-ky/typeof/compare/2.1.5...2.1.6) (2026-03-10)
 
 ### Tasks
