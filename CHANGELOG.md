@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.10](https://github.com/phun-ky/typeof/compare/2.1.9...2.1.10) (2026-04-14)
+
+### Tasks
+
+* 🤖 bump typescript from 5.9.3 to 6.0.2 in the major-updates group ([72e95b1](https://github.com/phun-ky/typeof/commit/72e95b12605582b5ce0820b8e6285c0f7261c478))
+* 🤖 Update tsconfig ([3f6cf4e](https://github.com/phun-ky/typeof/commit/3f6cf4e7d9bff11216a7b4235fe5052b6470e0d3))
+
 ## [2.1.9](https://github.com/phun-ky/typeof/compare/2.1.8...2.1.9) (2026-03-26)
 
 ### Tasks
