@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/phun-ky/typeof/compare/2.1.14...3.0.0) (2026-05-13)
+
+### ⚠ BREAKING CHANGES
+
+* 🧨 Dropped support for Node.js v20 and older
+
+### Tasks
+
+* 🤖 bump eslint-config-phun-ky ([4c0dbff](https://github.com/phun-ky/typeof/commit/4c0dbff5ce90890e9e77ec7fb00dbd618a694563))
+* 🤖 Update development toolchain ([b109118](https://github.com/phun-ky/typeof/commit/b109118420aa266a287cf500eab8c8cbd860720f))
+
 ## [2.1.14](https://github.com/phun-ky/typeof/compare/2.1.13...2.1.14) (2026-05-13)
 
 ### Tasks
