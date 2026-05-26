@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.2](https://github.com/phun-ky/typeof/compare/3.0.1...3.0.2) (2026-05-26)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group with 4 updates ([13aff06](https://github.com/phun-ky/typeof/commit/13aff063dbcc8a2561d9fac1d25ddfd05d6b1063))
+
 ## [3.0.1](https://github.com/phun-ky/typeof/compare/3.0.0...3.0.1) (2026-05-19)
 
 ### Tasks
