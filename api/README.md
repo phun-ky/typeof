@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2026-05-26T06:52:35.941Z
+> Last updated 2026-06-04T18:08:50.919Z
 
 ## Type Aliases
 
@@ -59,6 +59,8 @@ A union of standard JavaScript **constructable** built-ins
 Checks if the given value is a boolean.
 
 #### Param
+
+**value**
 
 The value to check.
 
@@ -118,6 +120,8 @@ Overloads:
 - **Boolean:** usable in contexts that require a plain `(v) => boolean`.
 
 #### Param
+
+**value**
 
 The value to check.
 
@@ -193,6 +197,8 @@ one of JavaScript's built-in constructors, such as `Object`, `Array`, `Function`
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Example
@@ -255,6 +261,8 @@ Will always return false on built in constructors like `Date` or `Array`.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Example
@@ -314,6 +322,8 @@ Copy of `isNotUndefined`
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Call Signature
@@ -366,6 +376,8 @@ Checks if the given value is a function.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Call Signature
@@ -415,6 +427,8 @@ that is neither `Object.prototype` (standard object) nor `null` (no prototype).
 It helps differentiate between instances of custom classes and plain objects.
 
 #### Param
+
+**value**
 
 The value to check.
 
@@ -472,6 +486,8 @@ Checks if the given value is not a boolean.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Call Signature
@@ -523,6 +539,8 @@ Defined in: [main.ts:110](https://github.com/phun-ky/typeof/blob/main/src/main.t
 Checks if the given value is not a number.
 
 #### Param
+
+**value**
 
 The value to check.
 
@@ -576,6 +594,8 @@ Checks if the given value is not a string.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Call Signature
@@ -627,6 +647,8 @@ Defined in: [main.ts:30](https://github.com/phun-ky/typeof/blob/main/src/main.ts
 Checks if the given value is not undefined.
 
 #### Param
+
+**value**
 
 The value to check.
 
@@ -680,6 +702,8 @@ Checks if the given value is a number.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Call Signature
@@ -728,6 +752,8 @@ This function verifies whether the provided value is of type `'object'` or `'fun
 while ensuring that `null` is excluded.
 
 #### Param
+
+**value**
 
 The value to check.
 
@@ -818,6 +844,8 @@ and other exotic objects.
 
 #### Param
 
+**value**
+
 The value to test.
 
 #### Example
@@ -894,6 +922,8 @@ and does not have an unusual prototype chain.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Example
@@ -967,6 +997,8 @@ Checks if the given value is a string.
 
 #### Param
 
+**value**
+
 The value to check.
 
 #### Call Signature
@@ -1012,6 +1044,8 @@ Defined in: [main.ts:10](https://github.com/phun-ky/typeof/blob/main/src/main.ts
 Checks if the given value is undefined.
 
 #### Param
+
+**value**
 
 The value to check.
 
