@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2026-07-08T12:01:26.379Z
+> Last updated 2026-07-08T19:36:50.339Z
 
 ## Type Aliases
 
@@ -786,15 +786,16 @@ console.log(isObjectLoose(42)); // Output: false
 - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
 
 **Comparison**
-| Feature | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
-|------------------------|----------------------|----------------------|
-| Recognizes plain objects | ✅ Yes | ✅ Yes |
-| Recognizes functions | ❌ No | ✅ Yes |
-| Recognizes arrays | ❌ No | ✅ Yes |
-| Recognizes `Object.create(null)` objects | ✅ Yes | ✅ Yes |
-| Recognizes class instances | ❌ No | ✅ Yes |
-| Recognizes DOM elements | ❌ No | ✅ Yes |
-| Complexity | 🔴 High | 🟢 Low |
+
+| Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
+| ---------------------------------------- | ------------------------------- | ----------------------------- |
+| Recognizes plain objects                 | ✅ Yes                          | ✅ Yes                        |
+| Recognizes functions                     | ❌ No                           | ✅ Yes                        |
+| Recognizes arrays                        | ❌ No                           | ✅ Yes                        |
+| Recognizes `Object.create(null)` objects | ✅ Yes                          | ✅ Yes                        |
+| Recognizes class instances               | ❌ No                           | ✅ Yes                        |
+| Recognizes DOM elements                  | ❌ No                           | ✅ Yes                        |
+| Complexity                               | 🔴 High                         | 🟢 Low                        |
 
 #### Call Signature
 
@@ -1089,7 +1090,7 @@ Defined in: [main.ts:130](https://github.com/phun-ky/typeof/blob/main/src/main.t
 
 **Contributing**
 
-Want to contribute? Please read the [CONTRIBUTING.md](https://github.com/phun-ky/typeof/blob/main/CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](https://github.com/phun-ky/typeof/blob/main/CODE_OF_CONDUCT.md)
+Want to contribute? Please read the [CONTRIBUTING.md](https://github.com/phun-ky/typeof/blob/main/CONTRIBUTING.md) and [CODE\_OF\_CONDUCT.md](https://github.com/phun-ky/typeof/blob/main/CODE_OF_CONDUCT.md)
 
 **Sponsor me**
 

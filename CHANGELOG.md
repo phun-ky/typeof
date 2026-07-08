@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.6](https://github.com/phun-ky/typeof/compare/3.0.5...3.0.6) (2026-07-08)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group across 1 directory with 7 updates ([65b3d54](https://github.com/phun-ky/typeof/commit/65b3d5477c380248b1952762ae40bbfbab5ef96f))
+
 ## [3.0.5](https://github.com/phun-ky/typeof/compare/3.0.4...3.0.5) (2026-07-08)
 
 ### Tasks
