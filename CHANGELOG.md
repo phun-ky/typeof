@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.5](https://github.com/phun-ky/typeof/compare/3.0.4...3.0.5) (2026-07-08)
+
+### Tasks
+
+* 🤖 bump @types/node in the major-updates group ([f91cdaa](https://github.com/phun-ky/typeof/commit/f91cdaa2112687a7e55599a1f580ea25ba4d671b))
+
 ## [3.0.4](https://github.com/phun-ky/typeof/compare/3.0.3...3.0.4) (2026-06-15)
 
 ### Tasks
