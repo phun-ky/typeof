@@ -51,8 +51,12 @@ jobs:
       - name: Install dependencies
         run: | # Install and link dependencies
           npm i
+      - name: Lint
+        run: npm run style:lint
       - name: Build # Build all packages
         run: npm run build
+      - name: Import built entry point
+        run: node --input-type=module -e "import * as m from './dist/typeof.js'; if (typeof m.isString !== 'function') throw new Error('isString missing from dist/typeof.js');"
       - name: Test
         run: npm run test:ci
       - name: Upload coverage reports to Codecov

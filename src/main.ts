@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unused-modules */
 /**
  * @overload
  */
@@ -292,10 +291,13 @@ export function isObjectStrict(value: unknown): boolean {
     ? proto.constructor
     : null;
 
+  // Compare source text rather than identity, so plain objects from another
+  // realm (iframe, vm) are still recognised
   return (
     typeof Ctor === 'function' &&
     Ctor instanceof Ctor &&
-    Function.prototype.call(Ctor) === Function.prototype.call(value)
+    Function.prototype.toString.call(Ctor) ===
+      Function.prototype.toString.call(Object)
   );
 }
 
@@ -363,6 +365,19 @@ export function isObjectLoose(value: unknown): boolean {
 type ClassCtor<T = any> = new (...args: any[]) => T;
 
 /**
+ * Checks if a function is implemented natively by the engine or host.
+ *
+ * Uses `Function.prototype.toString` directly, so an overridden `toString`
+ * on the function itself is ignored.
+ *
+ * @param {Function} fn - The function to check.
+ * @returns {boolean} `true` if `fn` is native code, otherwise `false`.
+ */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+const isNativeFunction = (fn: Function): boolean =>
+  /\{\s*\[native code\]\s*\}\s*$/.test(Function.prototype.toString.call(fn));
+
+/**
  * @overload
  */
 export function isClass(value: unknown): value is ClassCtor;
@@ -400,6 +415,10 @@ export function isClass(value: unknown): boolean {
   if (typeof value !== 'function') return false;
 
   if (isBuiltInConstructor(value)) return false;
+
+  // Native constructors (ArrayBuffer, typed arrays, WeakRef, host classes like
+  // HTMLElement, ...) also have a non-writable prototype
+  if (isNativeFunction(value)) return false;
 
   try {
     // Check if the function has a valid prototype (classes always do)
@@ -503,9 +522,7 @@ export function isBuiltInConstructor(value: unknown): boolean {
  * - Plus callable, **non-constructable** built-ins: `BigInt` and `Symbol`
  */
 export type BuiltInCallable =
-  | BuiltInConstructor
-  | typeof BigInt
-  | typeof Symbol;
+  BuiltInConstructor | typeof BigInt | typeof Symbol;
 
 /* node:coverage disable */
 /**
