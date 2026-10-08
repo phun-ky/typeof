@@ -2,16 +2,20 @@ version: 2
 updates:
   - package-ecosystem: 'npm'
     directory: '/'
+    # Minor and patch updates are batched into one PR to keep the noise down.
+    # Majors are left ungrouped so each gets its own PR and can be reviewed,
+    # and if needed held back, on its own.
     groups:
       minor-and-patch:
         applies-to: version-updates
         update-types:
           - 'minor'
           - 'patch'
-      major-updates:
-        applies-to: version-updates
-        update-types:
-          - 'major'
+    ignore:
+      # typescript-eslint (via eslint-config-phun-ky) peers on typescript <6.1.
+      # Remove once it supports TypeScript 7.
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
     schedule:
       interval: 'weekly'
     labels:
@@ -19,7 +23,7 @@ updates:
       - 'problems: security'
     commit-message:
       prefix: 'chore: 🤖 '
-    open-pull-requests-limit: 2
+    open-pull-requests-limit: 5
     allow:
       - dependency-type: direct
       - dependency-type: production

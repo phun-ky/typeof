@@ -13,24 +13,19 @@
       - changed-files:
           - any-glob-to-any-file:
               - '.editorconfig'
-              - '.eslintignore'
-              - '.eslintrc.json'
-              - '.eslintrc.js'
+              - 'eslint.config.mjs'
               - '.gitignore'
               - '.release-it.json'
-              - '.renovate.json'
               - '.npmrc'
               - '.prettierrc'
+              - '.putout.json'
+              - 'tsconfig.json'
+              - 'typedoc.json'
 'context: github':
   - any:
       - changed-files:
           - any-glob-to-any-file:
               - .github/**
-'context: docker':
-  - any:
-      - changed-files:
-          - any-glob-to-any-file:
-              - Dockerfile
 'context: npm':
   - any:
       - changed-files:
