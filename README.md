@@ -42,6 +42,8 @@ A set of JavaScript helper functions to check for types.
 npm i --save @phun-ky/typeof
 ```
 
+Requires Node.js 22 or later. The package is ESM only.
+
 ## Usage
 
 Either import and run the required functions:
@@ -1056,11 +1058,15 @@ Defined in: [main.ts:130](https://github.com/phun-ky/typeof/blob/main/src/main.t
 
 ## Development
 
+Development uses Node.js 24.
+
 ```shell-session
 // Build
 $ npm run build
-// Run dev
-$ npm run dev
+// Build and watch for changes
+$ npm run rollup:dev
+// Lint
+$ npm run style:lint
 // Test
 $ npm test
 ```

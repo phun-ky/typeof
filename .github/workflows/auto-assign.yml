@@ -6,14 +6,18 @@ on:
     types: [opened]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    # Dependabot PRs get a read-only token, so assigning would fail
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-24.04
     permissions:
       issues: write
       pull-requests: write
     steps:
-    - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
-      with:
+      - name: 'Auto-assign issue'
+        uses: pozil/auto-assign-issue@v4.0.1
+        with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: phun-ky
           numOfAssignee: 1
+          # Self-assignment is skipped on PRs, so own PRs would otherwise fail
+          allowNoAssignees: true
