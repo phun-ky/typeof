@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
+import { runInNewContext } from 'node:vm';
 
 import {
   isBoolean,
@@ -119,7 +120,10 @@ describe('isObjectPlain', () => {
   });
 
   it('returns false for a function', () => {
-    assert.strictEqual(isObjectPlain(() => {}), false);
+    assert.strictEqual(
+      isObjectPlain(() => {}),
+      false
+    );
   });
 
   it('returns false for a Date instance', () => {
@@ -194,7 +198,7 @@ describe('isObjectPlain', () => {
     Object.setPrototypeOf(base, null);
     assert.strictEqual(isObjectPlain(base), true);
   });
-})
+});
 
 describe('isObjectStrict', () => {
   // Test with plain objects
@@ -248,6 +252,19 @@ describe('isObjectStrict', () => {
     const obj = Object.create({ a: 1 });
 
     assert.strictEqual(isObjectStrict(obj), false);
+  });
+
+  it('returns false for an object inheriting from another constructor prototype', () => {
+    assert.strictEqual(
+      isObjectStrict(Object.create(Function.prototype)),
+      false
+    );
+  });
+
+  it('returns true for a plain object from another realm', () => {
+    const foreign = runInNewContext('({ a: 1 })');
+
+    assert.strictEqual(isObjectStrict(foreign), true);
   });
 });
 
@@ -334,6 +351,33 @@ describe('isClass', () => {
     assert.strictEqual(isClass(Date), false);
   });
 
+  it('returns false for built-in constructors outside the known list', () => {
+    for (const ctor of [
+      ArrayBuffer,
+      Uint8Array,
+      DataView,
+      WeakRef,
+      AggregateError,
+      BigInt,
+      Symbol
+    ]) {
+      assert.strictEqual(isClass(ctor), false, ctor.name);
+    }
+  });
+
+  it('returns false for built-in constructors from another realm', () => {
+    assert.strictEqual(isClass(runInNewContext('Date')), false);
+  });
+
+  it('returns true for a class with an overridden static toString', () => {
+    class MyClass {
+      static toString() {
+        return 'function MyClass() { [native code] }';
+      }
+    }
+    assert.strictEqual(isClass(MyClass), true);
+  });
+
   it('returns false for primitive values', () => {
     assert.strictEqual(isClass(42), false);
     assert.strictEqual(isClass('hello'), false);
@@ -414,7 +458,6 @@ describe('isBuiltInConstructor', () => {
     assert.strictEqual(isBuiltInConstructor(new Date()), false);
   });
 });
-
 
 describe('isBuiltInCallable', () => {
   describe('returns true for built-in constructors', () => {
@@ -561,64 +604,66 @@ describe('isInstanceOfUnknownClass', () => {
 });
 
 describe('isFunction', () => {
+  it('returns true for arrow functions', () => {
+    assert.equal(
+      isFunction(() => {}),
+      true
+    );
+  });
 
-it("returns true for arrow functions", () => {
-  assert.equal(isFunction(() => {}), true);
+  it('returns true for function declarations/expressions', () => {
+    function fnDecl() {
+      /* noop */
+    }
+    const fnExpr = function () {
+      /* noop */
+    };
+
+    assert.equal(isFunction(fnDecl), true);
+    assert.equal(isFunction(fnExpr), true);
+  });
+
+  it('returns true for async functions and generator functions', () => {
+    async function asyncFn() {
+      return 1;
+    }
+    function* genFn() {
+      yield 1;
+    }
+
+    assert.equal(isFunction(asyncFn), true);
+    assert.equal(isFunction(genFn), true);
+  });
+
+  it("returns true for class constructors (typeof === 'function')", () => {
+    class MyClass {}
+    assert.equal(isFunction(MyClass), true);
+  });
+
+  it('returns false for non-functions', () => {
+    assert.equal(isFunction(null), false);
+    assert.equal(isFunction(undefined), false);
+    assert.equal(isFunction(true), false);
+    assert.equal(isFunction(false), false);
+    assert.equal(isFunction(0), false);
+    assert.equal(isFunction(1), false);
+    assert.equal(isFunction('fn'), false);
+    assert.equal(isFunction({}), false);
+    assert.equal(isFunction([]), false);
+    assert.equal(isFunction(Symbol('x')), false);
+    assert.equal(isFunction(10n), false);
+    assert.equal(isFunction(new Date()), false);
+  });
+
+  it('acts as a type guard in TypeScript', () => {
+    const value: unknown = () => 'ok';
+
+    if (isFunction(value)) {
+      // If the type guard works, `value` is callable here.
+      const result = value();
+      assert.equal(result, 'ok');
+    } else {
+      assert.fail('Expected value to be a function');
+    }
+  });
 });
-
-it("returns true for function declarations/expressions", () => {
-  function fnDecl() {
-    /* noop */
-  }
-  const fnExpr = function () {
-    /* noop */
-  };
-
-  assert.equal(isFunction(fnDecl), true);
-  assert.equal(isFunction(fnExpr), true);
-});
-
-it("returns true for async functions and generator functions", () => {
-  async function asyncFn() {
-    return 1;
-  }
-  function* genFn() {
-    yield 1;
-  }
-
-  assert.equal(isFunction(asyncFn), true);
-  assert.equal(isFunction(genFn), true);
-});
-
-it("returns true for class constructors (typeof === 'function')", () => {
-  class MyClass {}
-  assert.equal(isFunction(MyClass), true);
-});
-
-it("returns false for non-functions", () => {
-  assert.equal(isFunction(null), false);
-  assert.equal(isFunction(undefined), false);
-  assert.equal(isFunction(true), false);
-  assert.equal(isFunction(false), false);
-  assert.equal(isFunction(0), false);
-  assert.equal(isFunction(1), false);
-  assert.equal(isFunction("fn"), false);
-  assert.equal(isFunction({}), false);
-  assert.equal(isFunction([]), false);
-  assert.equal(isFunction(Symbol("x")), false);
-  assert.equal(isFunction(10n), false);
-  assert.equal(isFunction(new Date()), false);
-});
-
-it("acts as a type guard in TypeScript", () => {
-  const value: unknown = () => "ok";
-
-  if (isFunction(value)) {
-    // If the type guard works, `value` is callable here.
-    const result = value();
-    assert.equal(result, "ok");
-  } else {
-    assert.fail("Expected value to be a function");
-  }
-});
-})
