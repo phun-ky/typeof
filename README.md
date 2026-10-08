@@ -765,13 +765,13 @@ console.log(isObjectLoose(42)); // Output: false
 
 | Feature                                  | Strict Check (`isObjectStrict`) | Loose Check (`isObjectLoose`) |
 | ---------------------------------------- | ------------------------------- | ----------------------------- |
-| Recognizes plain objects                 | ✅ Yes                           | ✅ Yes                         |
-| Recognizes functions                     | ❌ No                            | ✅ Yes                         |
-| Recognizes arrays                        | ❌ No                            | ✅ Yes                         |
-| Recognizes `Object.create(null)` objects | ✅ Yes                           | ✅ Yes                         |
-| Recognizes class instances               | ❌ No                            | ✅ Yes                         |
-| Recognizes DOM elements                  | ❌ No                            | ✅ Yes                         |
-| Complexity                               | 🔴 High                          | 🟢 Low                         |
+| Recognizes plain objects                 | ✅ Yes                          | ✅ Yes                        |
+| Recognizes functions                     | ❌ No                           | ✅ Yes                        |
+| Recognizes arrays                        | ❌ No                           | ✅ Yes                        |
+| Recognizes `Object.create(null)` objects | ✅ Yes                          | ✅ Yes                        |
+| Recognizes class instances               | ❌ No                           | ✅ Yes                        |
+| Recognizes DOM elements                  | ❌ No                           | ✅ Yes                        |
+| Complexity                               | 🔴 High                         | 🟢 Low                        |
 
 #### Call Signature
 

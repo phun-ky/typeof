@@ -12,6 +12,7 @@ on:
       - 'eslint.config.mjs'
       - '.prettierrc'
       - 'custom-typedoc-plugin.js'
+      - '**/*.md'
       - '.github/workflows/check.yml'
   pull_request:
     branches: ['main']
