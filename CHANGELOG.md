@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.8](https://github.com/phun-ky/typeof/compare/3.0.7...3.0.8) (2026-10-08)
+
+### Bug
+
+* 🐛 reject non-plain objects in isObjectStrict and native constructors in isClass ([c9b2899](https://github.com/phun-ky/typeof/commit/c9b28996f92affc57dfc914a0616a4300c44c267))
+
 ## [3.0.7](https://github.com/phun-ky/typeof/compare/3.0.6...3.0.7) (2026-08-08)
 
 ### Tasks
