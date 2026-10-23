@@ -37,15 +37,33 @@
   "license": "MIT",
   "author": "Alexander Vassbotn Røyne-Helgesen <alexander@phun-ky.net>",
   "type": "module",
-  "main": "dist/typeof.js",
-  "types": "dist/typeof.d.ts",
+  "main": "./dist/typeof.cjs",
+  "module": "./dist/typeof.js",
+  "types": "./dist/typeof.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/typeof.d.ts",
+        "default": "./dist/typeof.js"
+      },
+      "require": {
+        "types": "./dist/typeof.d.cts",
+        "default": "./dist/typeof.cjs"
+      }
+    },
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*"
+  },
+  "sideEffects": false,
   "files": [
-    "/dist/typeof.js",
-    "/dist/typeof.js.map",
-    "/dist/typeof.d.ts"
+    "dist",
+    "src",
+    "!src/**/__tests__",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "npm run clean && npm run rollup",
+    "check:pack": "node scripts/check-pack.mjs",
     "clean": "rm -rf dist dts",
     "commit": "npx git-cz",
     "docs:gen": "node ./node_modules/.bin/typedoc",
@@ -67,6 +85,7 @@
     }
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
     "@release-it/conventional-changelog": "^12.0.2",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^1.0.0",
@@ -76,7 +95,9 @@
     "eslint-config-phun-ky": "^2.0.10",
     "git-cz": "^4.9.0",
     "glob-bin": "^1.0.0",
+    "globals": "^17.13.0",
     "prettier": "^3.8.0",
+    "publint": "^0.3.25",
     "putout": "^42.0.13",
     "release-it": "^21.1.1",
     "remark-github": "^12.0.0",

@@ -8,6 +8,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'rollup.config.js'
+      - 'scripts/**'
       - 'tsconfig.json'
       - 'eslint.config.mjs'
       - '.prettierrc'
@@ -36,8 +37,8 @@ jobs:
         run: npm run style:lint
       - name: Build
         run: npm run build
-      - name: Import built entry point
-        run: node --input-type=module -e "import * as m from './dist/typeof.js'; if (typeof m.isString !== 'function') throw new Error('isString missing from dist/typeof.js');"
+      - name: Check package # Packs, installs and imports the package from every entry point
+        run: npm run check:pack
       - name: Test
         run: npm run test:ci
       - name: Upload coverage reports to Codecov
