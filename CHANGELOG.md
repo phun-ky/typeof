@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.9](https://github.com/phun-ky/typeof/compare/3.0.8...3.0.9) (2026-10-23)
+
+### Tasks
+
+* 🤖 bump the minor-and-patch group across 1 directory with 9 updates ([7277ae2](https://github.com/phun-ky/typeof/commit/7277ae2193c5a03a7f1263cee1d4501ebc7d36ee))
+* 🤖 upgrade eslint-config-phun-ky to 2.0.10 and lint markdown ([31b57a6](https://github.com/phun-ky/typeof/commit/31b57a6aedb0b0838553b2eaa20700050d5d9be4))
+
+### Bug
+
+* 🐛 make the package work with require() on every Node 22 ([f336877](https://github.com/phun-ky/typeof/commit/f3368772e7ff793911e3de6bb5c029ca663537d9)), closes [#125](https://github.com/phun-ky/typeof/issues/125)
+
 ## [3.0.8](https://github.com/phun-ky/typeof/compare/3.0.7...3.0.8) (2026-10-08)
 
 ### Bug
