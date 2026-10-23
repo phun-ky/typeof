@@ -38,6 +38,13 @@ export default [
     input: 'src/main.ts',
     output: [
       {
+        file: './dist/typeof.cjs',
+        format: 'cjs',
+        sourcemap: true,
+        banner,
+        exports: 'named'
+      },
+      {
         name: 'typeof',
         file: './dist/typeof.js',
         format: 'esm',
@@ -59,7 +66,11 @@ export default [
   },
   {
     input: './dts/main.d.ts',
-    output: [{ file: './dist/typeof.d.ts', format: 'es' }],
+    output: [
+      { file: './dist/typeof.d.ts', format: 'es' },
+      // CommonJS types for the require condition
+      { file: './dist/typeof.d.cts', format: 'es' }
+    ],
     plugins: [dts()]
   }
 ];
