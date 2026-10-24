@@ -89,7 +89,7 @@
     "@release-it/conventional-changelog": "^12.0.2",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^1.0.0",
-    "@types/node": "^26.0.0",
+    "@types/node": "^24.19.2",
     "cobertura": "^1.0.1",
     "eslint": "^10.0.0",
     "eslint-config-phun-ky": "^2.0.10",
