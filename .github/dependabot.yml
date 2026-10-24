@@ -13,20 +13,21 @@ updates:
           - 'patch'
     ignore:
       # typescript-eslint (via eslint-config-phun-ky) peers on typescript <6.1.
-      # Remove once it supports TypeScript 7.
+      # Remove once it supports TypeScript 7 (#153).
       - dependency-name: 'typescript'
         update-types: ['version-update:semver-major']
+      # CI runs Node 24, so the Node types stay on 24
+      - dependency-name: '@types/node'
+        versions: ['>=25']
     schedule:
       interval: 'weekly'
     labels:
       - 'mindless: 📦 dependencies'
-      - 'problems: security'
     commit-message:
       prefix: 'chore: 🤖 '
     open-pull-requests-limit: 5
     allow:
       - dependency-type: direct
-      - dependency-type: production
   - package-ecosystem: 'github-actions'
     directory: '/'
     # Same grouping as npm: minor and patch together, each major on its own.
