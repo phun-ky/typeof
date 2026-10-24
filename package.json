@@ -25,7 +25,7 @@
     "isBuiltInCallable",
     "isInstanceOfUnknownClass"
   ],
-  "homepage": "https://phun-ky.net/projects/typeof",
+  "homepage": "https://github.com/phun-ky/typeof#readme",
   "bugs": {
     "url": "https://github.com/phun-ky/typeof/issues"
   },
