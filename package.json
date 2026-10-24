@@ -77,7 +77,7 @@
     "style:lint": "eslint . && prettier --check src",
     "test": "glob-bin -c \"node --import tsx --test --no-warnings\" \"./src/**/__tests__/**/*.[jt]s\"",
     "pretest:ci": "rm -rf coverage && mkdir -p coverage",
-    "test:ci": "glob-bin -c \"node --import tsx --test --no-warnings --experimental-test-coverage --test-reporter=cobertura --test-reporter-destination=coverage/cobertura-coverage.xml --test-reporter=spec --test-reporter-destination=stdout\" \"./src/**/__tests__/**/*.[jt]s\""
+    "test:ci": "glob-bin -c \"node --enable-source-maps --import tsx --test --no-warnings --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-exclude='src/**/__tests__/**' --test-coverage-lines=97.9 --test-coverage-functions=100 --test-coverage-branches=97.9 --test-reporter=cobertura --test-reporter-destination=coverage/cobertura-coverage.xml --test-reporter=spec --test-reporter-destination=stdout\" \"./src/**/__tests__/**/*.[jt]s\""
   },
   "config": {
     "commitizen": {
