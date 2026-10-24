@@ -158,7 +158,6 @@ export function isNotUndefined(value: unknown): boolean {
   return !isUndefined(value);
 }
 
-/* node:coverage disable */
 /**
  * @overload
  */
@@ -178,7 +177,6 @@ export function isDefined(value: unknown): boolean;
 export function isDefined(value: unknown): boolean {
   return !isUndefined(value);
 }
-/* node:coverage enable */
 
 /**
  * @overload
@@ -243,7 +241,6 @@ export function isObjectStrict(
  */
 export function isObjectStrict(value: unknown): boolean;
 
-/* node:coverage disable */
 /**
  * Checks if a given value is a plain object.
  *
@@ -277,7 +274,6 @@ export function isObjectStrict(value: unknown): boolean;
  * - Use `isObjectStrict` when you need a **strict check for plain objects**.
  * - Use `isObjectLoose` if you need to check if a value is an **object-like structure**, including functions.
  */
-/* node:coverage enable */
 export function isObjectStrict(value: unknown): boolean {
   if (typeof value !== 'object' || value === null) return false;
 
@@ -420,14 +416,12 @@ export function isClass(value: unknown): boolean {
   // HTMLElement, ...) also have a non-writable prototype
   if (isNativeFunction(value)) return false;
 
-  try {
-    // Check if the function has a valid prototype (classes always do)
-    const descriptor = Object.getOwnPropertyDescriptor(value, 'prototype');
+  // Check if the function has a valid prototype (classes always do). This
+  // can't throw: only proxies can make the lookup throw, and they show as
+  // native code above.
+  const descriptor = Object.getOwnPropertyDescriptor(value, 'prototype');
 
-    return !!descriptor && !descriptor.writable; // Class prototypes are non-writable
-  } catch {
-    return false;
-  }
+  return !!descriptor && !descriptor.writable; // Class prototypes are non-writable
 }
 
 /**
@@ -524,13 +518,11 @@ export function isBuiltInConstructor(value: unknown): boolean {
 export type BuiltInCallable =
   BuiltInConstructor | typeof BigInt | typeof Symbol;
 
-/* node:coverage disable */
 /**
  * Canonical set of built-in callables.
  * Note: identity is **realm-specific** (different iframes/VMs have different
  * constructor identities), so values from another realm won't match here.
  */
-/* node:coverage enable */
 const BUILTIN_CALLABLES: ReadonlySet<BuiltInCallable> = new Set([
   Object,
   Array,
