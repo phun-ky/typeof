@@ -3,7 +3,7 @@ name: Checks
 on:
   push:
     branches: ['main']
-    paths: &check-paths
+    paths:
       - 'src/**'
       - 'package.json'
       - 'package-lock.json'
@@ -14,11 +14,14 @@ on:
       - '.prettierrc'
       - 'custom-typedoc-plugin.js'
       - '**/*.md'
-      - '.github/workflows/check.yml'
+      - '.github/**'
+      - 'typedoc.json'
+      - '.release-it.json'
   pull_request:
     branches: ['main']
     types: [opened, synchronize, reopened]
-    paths: *check-paths
+    # No paths filter here: check is a required status, so it has to run on
+    # every PR or a PR touching only unlisted files could never merge.
   workflow_dispatch:
 
 jobs:

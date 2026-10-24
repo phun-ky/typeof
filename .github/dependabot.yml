@@ -27,3 +27,18 @@ updates:
     allow:
       - dependency-type: direct
       - dependency-type: production
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    # Same grouping as npm: minor and patch together, each major on its own.
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - 'minor'
+          - 'patch'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'mindless: 📦 dependencies'
+    commit-message:
+      prefix: 'chore: 🤖 '
