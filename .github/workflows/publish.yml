@@ -14,19 +14,26 @@ on:
       - 'rollup.config.js'
       - 'tsconfig.json'
       - '.release-it.json'
+      - 'scripts/**'
       - '.github/scripts/should-release.sh'
       - '.github/workflows/publish.yml'
   workflow_dispatch:
 
+# Read-only by default; only the publish job gets an OIDC token for npm
 permissions:
   contents: read
+
+# One release at a time; never cancel a release halfway
+concurrency:
+  group: publish
+  cancel-in-progress: false
 
 jobs:
   publish:
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-24.04
     permissions:
-      contents: write # For git operations
+      contents: read # Release commits, tags and GitHub releases use GH_TOKEN
       id-token: write # Required for npm trusted publishing (OIDC)
     steps:
       - name: Checkout
@@ -45,14 +52,28 @@ jobs:
       - name: Check for releasable changes
         id: guard
         run: bash .github/scripts/should-release.sh
-      - name: Release
+      - name: Audit runtime dependencies # No release with a known high or critical vulnerability
+        if: steps.guard.outputs.release == 'true'
+        run: npm audit --omit=dev --audit-level=high
+      - name: Release # Builds, runs check:pack, then publishes
         if: steps.guard.outputs.release == 'true'
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "$ACTOR"
+          git config user.email "$ACTOR@users.noreply.github.com"
           npm run release
         env:
+          ACTOR: ${{ github.actor }} # via env, never interpolated into the script
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Attach SBOM to the release # CycloneDX, with any inlined packages
+        if: steps.guard.outputs.release == 'true'
+        run: |
+          version=$(node -p "require('./package.json').version")
+          file="$RUNNER_TEMP/typeof-$version.cdx.json"
+          node scripts/sbom.mjs > "$file"
+          gh release upload "$version" "$file" --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
   notify:
     name: Notify failed build
     needs: publish
