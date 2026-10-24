@@ -3,7 +3,8 @@
 // tests, lint it with publint and @arethetypeswrong/cli, then install it in an
 // empty project, check every source map resolves and that the builds bundle no
 // dependencies, and call the helpers through import, require, the old dist
-// path and a browser bundle. Run after `npm run build`.
+// path and a browser bundle, and run the README examples against it. Run
+// after `npm run build`.
 //
 // With CHECK_PACK_NODE set to another Node binary, the import, require and
 // dist path calls also run on it, and its version must be the engines minimum,
@@ -25,6 +26,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runInNewContext } from 'node:vm';
+
+import { runReadmeExamples } from './readme-examples.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const BIN = join(ROOT, 'node_modules', '.bin');
@@ -298,6 +301,26 @@ try {
         `a browser bundle of the installed tarball failed: ${error}`
       );
     }
+
+    // Every README example, with the values its comments promise
+    const exported = JSON.parse(
+      execFileSync(
+        'node',
+        ['-p', `JSON.stringify(Object.keys(require(${name})))`],
+        { cwd: app, encoding: 'utf8' }
+      )
+    );
+    const readme = runReadmeExamples(
+      join(ROOT, 'README.md'),
+      app,
+      pkg,
+      exported
+    );
+
+    problems.push(...readme.problems);
+    console.log(
+      `README examples: ${readme.blocks} blocks, ${readme.checks} commented values checked`
+    );
   }
 } finally {
   rmSync(work, { recursive: true, force: true });
