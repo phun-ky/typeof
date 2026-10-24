@@ -112,11 +112,13 @@ describe('isObjectPlain', () => {
 
   it('returns true for a frozen plain object', () => {
     const obj = Object.freeze({ a: 1 });
+
     assert.strictEqual(isObjectPlain(obj), true);
   });
 
   it('returns true for a sealed plain object', () => {
     const obj = Object.seal({ a: 1 });
+
     assert.strictEqual(isObjectPlain(obj), true);
   });
 
@@ -177,34 +179,40 @@ describe('isObjectPlain', () => {
 
   // Unusual prototypes
   it('returns false for an object constructed via a custom constructor', () => {
-    function CustomConstructor(this: any) {
+    function CustomConstructor(this: { x: number }) {
       this.x = 1;
     }
     CustomConstructor.prototype.y = 2;
-    const obj = new (CustomConstructor as any)();
+
+    const obj = new (CustomConstructor as unknown as new () => object)();
+
     assert.strictEqual(isObjectPlain(obj), false);
   });
 
   it('returns false for an object with a prototype other than Object.prototype or null', () => {
     const obj = Object.create({ a: 1 });
+
     assert.strictEqual(isObjectPlain(obj), false);
   });
 
   it('returns true for null-prototype objects even with properties', () => {
     const obj = Object.create(null);
-    (obj as any).x = 1;
+
+    obj.x = 1;
     assert.strictEqual(isObjectPlain(obj), true);
   });
 
   it('returns false after changing a plain object prototype to a custom one', () => {
     const base = { a: 1 };
     const customProto = { p: true };
+
     Object.setPrototypeOf(base, customProto);
     assert.strictEqual(isObjectPlain(base), false);
   });
 
   it('returns true after setting a plain object prototype to null', () => {
     const base = { a: 1 };
+
     Object.setPrototypeOf(base, null);
     assert.strictEqual(isObjectPlain(base), true);
   });
@@ -532,7 +540,9 @@ describe('isBuiltInCallable', () => {
     it('class declarations and regular/arrow functions', () => {
       class MyClass {}
       function fn() {}
+
       const arrow = () => {};
+
       async function afn() {}
       function* gfn() {}
 
@@ -556,6 +566,7 @@ describe('isBuiltInCallable', () => {
     it('bound Array and proxied Array', () => {
       const boundArray = Array.bind(null);
       const proxiedArray = new Proxy(Array, {});
+
       assert.equal(isBuiltInCallable(boundArray), false);
       assert.equal(isBuiltInCallable(proxiedArray), false);
     });
@@ -645,6 +656,7 @@ describe('isFunction', () => {
     function fnDecl() {
       /* noop */
     }
+
     const fnExpr = function () {
       /* noop */
     };
@@ -665,7 +677,7 @@ describe('isFunction', () => {
     assert.equal(isFunction(genFn), true);
   });
 
-  it("returns true for class constructors (typeof === 'function')", () => {
+  it('returns true for class constructors, whose typeof is function', () => {
     class MyClass {}
     assert.equal(isFunction(MyClass), true);
   });
@@ -691,6 +703,7 @@ describe('isFunction', () => {
     if (isFunction(value)) {
       // If the type guard works, `value` is callable here.
       const result = value();
+
       assert.equal(result, 'ok');
     } else {
       assert.fail('Expected value to be a function');

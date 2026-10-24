@@ -8,6 +8,8 @@ export default defineConfig([
   {
     extends: [customConfig]
   },
+  // eslint-config-phun-ky ignores tests; lint them here too
+  globalIgnores(['!**/__tests__']),
   {
     files: ['scripts/**/*.mjs'],
     languageOptions: {
@@ -19,6 +21,13 @@ export default defineConfig([
       // Command-line scripts report to the terminal
       'no-console': 'off',
       // They run in Node, not in the browsers the package supports
+      'compat/compat': 'off'
+    }
+  },
+  {
+    // Tests run in Node, not in the browsers the package supports
+    files: ['src/**/__tests__/**'],
+    rules: {
       'compat/compat': 'off'
     }
   },

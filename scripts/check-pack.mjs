@@ -1,9 +1,13 @@
 // Check what npm would publish: pack the package, check the tarball holds the
 // files package.json points at, its LICENSE, README and CHANGELOG, and no
 // tests, lint it with publint and @arethetypeswrong/cli, then install it in an
-// empty project, check every source map resolves, and call the helpers through
-// import, require, the old dist path and a browser bundle. Run after
-// `npm run build`.
+// empty project, check every source map resolves and that the builds bundle no
+// dependencies, and call the helpers through import, require, the old dist
+// path and a browser bundle. Run after `npm run build`.
+//
+// With CHECK_PACK_NODE set to another Node binary, the import, require and
+// dist path calls also run on it, and its version must be the engines minimum,
+// so the oldest Node the package allows is tested.
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { rollup } from 'rollup';
 
@@ -24,6 +28,10 @@ import { runInNewContext } from 'node:vm';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const BIN = join(ROOT, 'node_modules', '.bin');
+// Bare specifiers in import, export from, import() and require()
+const IMPORT =
+  /(?:\bfrom\s*|\bimport\s*\(?\s*|\brequire\s*\(\s*)["']([^"'.][^"']*)["']/g;
+const FLOOR_NODE = process.env.CHECK_PACK_NODE;
 /** Run a linter; return its output if it fails. */
 const lint = (command, args) => {
   try {
@@ -129,6 +137,56 @@ try {
       app
     );
 
+    // Runtime dependencies are declared, never bundled: the ES module and
+    // CommonJS builds may not contain code from node_modules, and every
+    // package they import must be a dependency
+    const declared = new Set([
+      ...Object.keys(pkg.dependencies ?? {}),
+      ...Object.keys(pkg.peerDependencies ?? {})
+    ]);
+    const moduleBuilds = new Set(
+      [
+        pkg.exports?.['.']?.import?.default,
+        pkg.exports?.['.']?.require?.default,
+        pkg.main,
+        pkg.module
+      ]
+        .filter(Boolean)
+        .map((path) => path.replace(/^\.\//, ''))
+    );
+
+    for (const file of moduleBuilds) {
+      const code = readFileSync(join(installed, file), 'utf8');
+      const map = `${join(installed, file)}.map`;
+      const inlined = existsSync(map)
+        ? JSON.parse(readFileSync(map, 'utf8')).sources.filter((source) =>
+            source.includes('node_modules/')
+          )
+        : [];
+      const imported = [...code.matchAll(IMPORT)]
+        .map(([, specifier]) => specifier)
+        .filter((specifier) => !specifier.startsWith('node:'))
+        .map((specifier) =>
+          specifier
+            .split('/')
+            .slice(0, specifier.startsWith('@') ? 2 : 1)
+            .join('/')
+        );
+
+      for (const source of inlined) {
+        problems.push(
+          `${file} inlines ${source}; declare it in dependencies and keep it external`
+        );
+      }
+
+      for (const dependency of new Set(imported)) {
+        if (!declared.has(dependency))
+          problems.push(
+            `${file} imports ${dependency}, which isn't in dependencies`
+          );
+      }
+    }
+
     // Our own sources must be published next to the maps; bundled
     // dependencies are not installed, so their source must be embedded
     for (const map of mapsIn(installed)) {
@@ -178,12 +236,37 @@ try {
         `${expect} check('dist path', await import(${JSON.stringify(`${pkg.name}/dist/typeof.js`)}));`
       ]
     };
+    const runtimes = ['node'];
 
-    for (const [how, args] of Object.entries(smokes)) {
-      try {
-        execFileSync('node', args, { cwd: app, stdio: 'inherit' });
-      } catch {
-        problems.push(`${how} of the installed tarball failed`);
+    if (FLOOR_NODE) {
+      // The floor run is only meaningful on exactly the engines minimum
+      const floor = pkg.engines?.node?.match(/^>=\s*(\d+\.\d+\.\d+)$/)?.[1];
+      const version = execFileSync(FLOOR_NODE, ['--version'], {
+        encoding: 'utf8'
+      }).trim();
+
+      if (version === `v${floor}`) runtimes.push(FLOOR_NODE);
+      else
+        problems.push(
+          `CHECK_PACK_NODE is Node ${version}, but engines.node is ${pkg.engines?.node}`
+        );
+    }
+
+    for (const runtime of runtimes) {
+      const version = execFileSync(runtime, ['--version'], {
+        encoding: 'utf8'
+      }).trim();
+
+      console.log(`Node ${version}:`);
+
+      for (const [how, args] of Object.entries(smokes)) {
+        try {
+          execFileSync(runtime, args, { cwd: app, stdio: 'inherit' });
+        } catch {
+          problems.push(
+            `${how} of the installed tarball failed on Node ${version}`
+          );
+        }
       }
     }
 
