@@ -8,6 +8,7 @@ import {
   isNotNumber,
   isNotString,
   isNotUndefined,
+  isDefined,
   isNumber,
   isObjectLoose,
   isObjectStrict,
@@ -19,7 +20,7 @@ import {
   isObjectPlain,
   isBuiltInCallable,
   isFunction
-} from '../main';
+} from '../main.ts';
 
 describe('isString', () => {
   it('should typecheck the given variable correctly', () => {
@@ -83,6 +84,15 @@ describe('isNotUndefined', () => {
     assert.equal(isNotUndefined(123), true);
     assert.equal(isNotUndefined('test'), true);
     assert.equal(isNotUndefined(true), true);
+  });
+});
+describe('isDefined', () => {
+  it('should typecheck the given variable correctly', () => {
+    assert.equal(isDefined(undefined), false);
+    assert.equal(isDefined(null), true);
+    assert.equal(isDefined(0), true);
+    assert.equal(isDefined(''), true);
+    assert.equal(isDefined(false), true);
   });
 });
 
@@ -395,6 +405,25 @@ describe('isClass', () => {
     assert.strictEqual(isClass(new Date()), false);
     assert.strictEqual(isClass(new Map()), false);
     assert.strictEqual(isClass(new Set()), false);
+  });
+
+  // The only functions whose prototype descriptor lookup throws are proxies,
+  // and Function.prototype.toString shows every callable proxy as native code
+  it('returns false for a proxy whose descriptor trap throws', () => {
+    const proxy = new Proxy(class {}, {
+      getOwnPropertyDescriptor() {
+        throw new Error('trap');
+      }
+    });
+
+    assert.strictEqual(isClass(proxy), false);
+  });
+
+  it('returns false for a revoked proxy of a class', () => {
+    const { proxy, revoke } = Proxy.revocable(class {}, {});
+
+    revoke();
+    assert.strictEqual(isClass(proxy), false);
   });
 });
 

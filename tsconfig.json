@@ -3,6 +3,8 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "noEmit": true,
+    // Node runs the tests with its own type stripping, which needs .ts imports
+    "allowImportingTsExtensions": true,
     "types": ["node"]
   },
   "include": ["src"],
