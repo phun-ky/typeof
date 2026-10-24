@@ -24,7 +24,7 @@ published_paths=(
   README.md
   LICENSE
   rollup.config.js
-  tsconfig.json
+  tsconfig.build.json
 )
 
 decide() {

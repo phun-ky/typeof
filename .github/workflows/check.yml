@@ -10,6 +10,7 @@ on:
       - 'rollup.config.js'
       - 'scripts/**'
       - 'tsconfig.json'
+      - 'tsconfig.build.json'
       - 'eslint.config.mjs'
       - '.prettierrc'
       - 'custom-typedoc-plugin.js'
@@ -41,6 +42,8 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run style:lint
+      - name: Typecheck # The source and the tests
+        run: npm run typecheck
       - name: Build
         run: npm run build
       - name: Check package # Packs, installs and imports the package from every entry point
