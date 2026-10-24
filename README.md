@@ -42,7 +42,8 @@ A set of JavaScript helper functions to check for types.
 npm i --save @phun-ky/typeof
 ```
 
-Requires Node.js 22 or later. The package is ESM only.
+Requires Node.js 22 or later. Ships ES modules and CommonJS, so both `import`
+and `require()` work.
 
 ## Usage
 
@@ -50,6 +51,14 @@ Either import and run the required functions:
 
 ```javascript
 import { isString } from '@phun-ky/typeof';
+
+isString('asd'); // true;
+```
+
+Or require them from CommonJS:
+
+```javascript
+const { isString } = require('@phun-ky/typeof');
 
 isString('asd'); // true;
 ```
