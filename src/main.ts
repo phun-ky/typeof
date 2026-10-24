@@ -420,14 +420,12 @@ export function isClass(value: unknown): boolean {
   // HTMLElement, ...) also have a non-writable prototype
   if (isNativeFunction(value)) return false;
 
-  try {
-    // Check if the function has a valid prototype (classes always do)
-    const descriptor = Object.getOwnPropertyDescriptor(value, 'prototype');
+  // Check if the function has a valid prototype (classes always do). This
+  // can't throw: only proxies can make the lookup throw, and they show as
+  // native code above.
+  const descriptor = Object.getOwnPropertyDescriptor(value, 'prototype');
 
-    return !!descriptor && !descriptor.writable; // Class prototypes are non-writable
-  } catch {
-    return false;
-  }
+  return !!descriptor && !descriptor.writable; // Class prototypes are non-writable
 }
 
 /**
