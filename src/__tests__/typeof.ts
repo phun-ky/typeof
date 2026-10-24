@@ -243,7 +243,8 @@ describe('isObjectStrict', () => {
   it('returns false for an object with a modified constructor', () => {
     function CustomConstructor() {}
 
-    const obj = new CustomConstructor();
+    // A plain function used as a constructor, which TypeScript doesn't type
+    const obj = new (CustomConstructor as unknown as new () => object)();
 
     assert.strictEqual(isObjectStrict(obj), false);
   });
