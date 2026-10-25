@@ -16,6 +16,8 @@ on:
       - 'custom-typedoc-plugin.js'
       - '**/*.md'
       - '.github/**'
+      - '.bestpractices.json'
+      - 'security-insights.yml'
       - 'typedoc.json'
       - '.release-it.json'
   pull_request:
@@ -49,6 +51,8 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run style:lint
+      - name: Check OpenSSF Best Practices answers # Valid statuses, and every link resolves
+        run: npm run check:bestpractices
       - name: Typecheck # The source and the tests
         run: npm run typecheck
       - name: Build
