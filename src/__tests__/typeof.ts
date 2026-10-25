@@ -216,6 +216,49 @@ describe('isObjectPlain', () => {
     Object.setPrototypeOf(base, null);
     assert.strictEqual(isObjectPlain(base), true);
   });
+
+  // Another realm (iframe, vm) has its own Object.prototype
+  it('returns true for a plain object from another realm', () => {
+    assert.strictEqual(isObjectPlain(runInNewContext('({ a: 1 })')), true);
+    assert.strictEqual(isObjectPlain(runInNewContext('new Object()')), true);
+  });
+
+  it('returns false for non-plain objects from another realm', () => {
+    assert.strictEqual(isObjectPlain(runInNewContext('[]')), false);
+    assert.strictEqual(isObjectPlain(runInNewContext('new Date()')), false);
+    assert.strictEqual(
+      isObjectPlain(runInNewContext('new (class A {})()')),
+      false
+    );
+    assert.strictEqual(
+      isObjectPlain(runInNewContext('Object.create({ a: 1 })')),
+      false
+    );
+  });
+
+  it('returns false for a prototype that only claims to be Object.prototype', () => {
+    // Null-prototype prototype without a constructor
+    assert.strictEqual(
+      isObjectPlain(Object.create(Object.create(null))),
+      false
+    );
+
+    // A constructor property that points at Object, but not back at the prototype
+    const fake = Object.assign(Object.create(null), { constructor: Object });
+
+    assert.strictEqual(isObjectPlain(Object.create(fake)), false);
+  });
+
+  it('returns false for an instance of a constructor with a null-prototype prototype', () => {
+    function Custom() {}
+
+    Custom.prototype = Object.create(null);
+    Custom.prototype.constructor = Custom;
+
+    const instance = new (Custom as unknown as new () => object)();
+
+    assert.strictEqual(isObjectPlain(instance), false);
+  });
 });
 
 describe('isObjectStrict', () => {
