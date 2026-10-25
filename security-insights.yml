@@ -91,7 +91,7 @@ repository:
           SECURITY.md say what the package does and does not guarantee:
           type checks with no side effects, no dynamic code and no runtime
           dependencies; three helpers pass on errors from hostile values,
-          and some answers differ across realms.
+          and the built-in checks don't recognise another realm's built-ins.
     tools:
       - name: CodeQL
         type: SAST

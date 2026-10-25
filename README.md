@@ -828,6 +828,9 @@ Determines whether a value is a plain object (i.e., created via an object litera
 This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
 and other exotic objects.
 
+Plain objects from another realm, such as an iframe or a `node:vm` context,
+count too.
+
 #### Param
 
 The value to test.

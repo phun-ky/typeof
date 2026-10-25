@@ -195,6 +195,9 @@ export function isObjectPlain(value: unknown): boolean;
  * This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
  * and other exotic objects.
  *
+ * Plain objects from another realm, such as an iframe or a `node:vm` context,
+ * count too.
+ *
  * @param {unknown} value - The value to test.
  * @returns {boolean} `true` if `value` is a plain object, otherwise `false`.
  *
@@ -226,7 +229,22 @@ export function isObjectPlain(value: unknown): boolean {
 
   const proto = Object.getPrototypeOf(value);
 
-  return proto === Object.prototype || proto === null;
+  if (proto === Object.prototype || proto === null) return true;
+
+  // Another realm's (iframe, vm) Object.prototype: its own prototype is null,
+  // and its constructor is that realm's Object, which points back at it
+  if (Object.getPrototypeOf(proto) !== null) return false;
+
+  const Ctor = Object.prototype.hasOwnProperty.call(proto, 'constructor')
+    ? proto.constructor
+    : undefined;
+
+  return (
+    typeof Ctor === 'function' &&
+    Ctor.prototype === proto &&
+    Function.prototype.toString.call(Ctor) ===
+      Function.prototype.toString.call(Object)
+  );
 }
 
 /**
