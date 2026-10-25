@@ -84,14 +84,13 @@ repository:
   security:
     assessments:
       self:
-        evidence: https://github.com/phun-ky/typeof/blob/main/SECURITY.md#security-expectations
+        evidence: https://github.com/phun-ky/typeof/blob/main/SECURITY.md#assurance-case
         date: '2026-10-25'
         comment: |
-          No separate assurance case. The security expectations in
-          SECURITY.md say what the package does and does not guarantee:
-          type checks with no side effects, no dynamic code and no runtime
-          dependencies; three helpers pass on errors from hostile values,
-          and the built-in checks don't recognise another realm's built-ins.
+          The assurance case in SECURITY.md: threat model, trust boundaries,
+          secure design principles and the common weaknesses countered. The
+          security expectations above it say what the package does and does
+          not guarantee, with an issue for each known gap.
     tools:
       - name: CodeQL
         type: SAST

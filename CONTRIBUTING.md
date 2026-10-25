@@ -23,6 +23,7 @@ smooths out the experience for everyone involved.
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Enhancements](#suggesting-enhancements)
   - [Contributing Code](#contributing-code)
+    - [Architecture](#architecture)
     - [Development](#development)
     - [Coding Style](#coding-style)
     - [Tests](#tests)
@@ -128,6 +129,33 @@ behaviour you'd like instead, and explains why it would be useful to most users.
 Larger changes are best discussed in an issue first, so the work fits the
 [roadmap](ROADMAP.md).
 
+#### Architecture
+
+typeof is one TypeScript module with no runtime dependencies:
+
+- **`src/main.ts`** holds every helper. Each takes one value and returns a
+  boolean, with no state and no side effects. The only shared data is a private
+  set of built-in callables, which isn't exported.
+- **rollup** (`rollup.config.js`) compiles it with the strict
+  `tsconfig.build.json` and minifies it into `dist/typeof.js` (an ES module)
+  and `dist/typeof.cjs` (CommonJS), each with a source map that points at the
+  published `src/main.ts`. A second pass bundles the declarations into
+  `dist/typeof.d.ts` and `dist/typeof.d.cts`.
+- **`package.json`** maps `import` and `require` to those builds and their
+  types in `exports`, keeps `./dist/*` working for older deep imports, and
+  publishes `dist`, `src` without tests, and `CHANGELOG.md`.
+- **Tests** live in `src/__tests__`: `typeof.ts` with examples for each helper,
+  and `properties.ts` with property-based tests (fast-check) for rules that hold
+  for every value. `tsconfig.json` typechecks them together with the source.
+- **Scripts** in `scripts/` check what gets published (`check-pack.mjs`, which
+  also runs `readme-examples.mjs`), write the SBOM for each release
+  (`sbom.mjs`), and check the OpenSSF Best Practices answers
+  (`check-bestpractices.mjs`, `bestpractices-url.mjs`).
+- **Workflows** in `.github/workflows/` run the checks on every pull request
+  (`check.yml`, `dependency-review.yml`), release from `main` (`publish.yml`,
+  with the release guard in `.github/scripts/should-release.sh`), and score the
+  project (`scorecard.yml`).
+
 #### Development
 
 You need Node.js 24 and npm 11.
@@ -175,6 +203,9 @@ pull request that fails them can't be merged.
 - **Coverage stays at 100%.** `npm run test:ci` fails when the source falls
   below 100% of lines, functions or branches, and CI uploads a coverage report
   for every pull request. Don't exclude code from coverage; test it instead.
+- **Rules that hold for every value** belong in `src/__tests__/properties.ts`,
+  tested with fast-check on generated values. Its seed is fixed, so every run
+  checks the same values and a failure can be reproduced.
 - **README examples are tested too:** `npm run check:pack` runs them and checks
   the values in their comments, such as `// true`.
 
