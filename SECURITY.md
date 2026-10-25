@@ -72,12 +72,11 @@ What you can't rely on:
   whose traps throw, a revoked proxy, or a `Symbol.toStringTag` getter that
   throws. Wrap the call in `try`/`catch` when the value comes from untrusted
   code ([#170](https://github.com/phun-ky/typeof/issues/170)).
-- **The same answer across realms.** Values from another realm, such as an
-  iframe or a `node:vm` context, have their own built-ins.
-  `isBuiltInConstructor` and `isBuiltInCallable` don't recognise another
-  realm's built-ins, and `isObjectPlain` returns `false` for a plain object
-  from another realm, while `isObjectStrict` returns `true`
-  ([#169](https://github.com/phun-ky/typeof/issues/169)).
+- **Recognising another realm's built-ins.** Values from another realm, such
+  as an iframe or a `node:vm` context, have their own built-ins.
+  `isBuiltInConstructor` and `isBuiltInCallable` don't recognise them.
+  `isObjectPlain` and `isObjectStrict` do recognise plain objects from another
+  realm.
 
 ## Verifying Releases
 
