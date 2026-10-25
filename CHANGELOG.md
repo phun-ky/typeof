@@ -1,5 +1,37 @@
 # Changelog
 
+## [3.0.10](https://github.com/phun-ky/typeof/compare/3.0.9...3.0.10) (2026-10-25)
+
+### Tasks
+
+* 🤖 add a sign-off hook for the DCO ([5f0f86b](https://github.com/phun-ky/typeof/commit/5f0f86b60f4acfabadd068f33d4bcfd6377ea827)), references [#141](https://github.com/phun-ky/typeof/issues/141)
+* 🤖 align with the shared repo brief decisions of 2026-10-23 ([def2c50](https://github.com/phun-ky/typeof/commit/def2c5066cdf3404114f1984dbf35476d272fb5f)), references [#128](https://github.com/phun-ky/typeof/issues/128)
+* 🤖 anchor labeler branch rules and drop rules for files the repo doesn't have ([632c028](https://github.com/phun-ky/typeof/commit/632c028324fbe43b943aafdb8fb99a0182c4e96c)), references [#143](https://github.com/phun-ky/typeof/issues/143)
+* 🤖 bump fast-uri from 3.1.8 to 3.1.9 ([42339ab](https://github.com/phun-ky/typeof/commit/42339ab3a4aa9807ba1d31eb7b682a5727354359))
+* 🤖 bump markdown-it from 14.3.2 to 14.3.3 ([d4a9128](https://github.com/phun-ky/typeof/commit/d4a912823033340f2b0b33e139c74aabaecbe6e5))
+* 🤖 bump serialize-javascript from 7.0.5 to 7.1.4 ([774322c](https://github.com/phun-ky/typeof/commit/774322cd50412be001829bba2aa7900841a1e584))
+* 🤖 bump the minor-and-patch group across 1 directory with 5 updates ([41be24b](https://github.com/phun-ky/typeof/commit/41be24b30dd92b9aee5ed48e3e5434d568813c10))
+* 🤖 Dependabot npm: one label, direct dependencies only, Node types held to 24 ([6d8c270](https://github.com/phun-ky/typeof/commit/6d8c270f411edae07b73bd6d74e4bf1be8336807)), references [#134](https://github.com/phun-ky/typeof/issues/134)
+* 🤖 fix the vulnerable dev dependencies ([a5a5ce9](https://github.com/phun-ky/typeof/commit/a5a5ce98ca93a687bc416b3a4021fd0a19f9beb2)), references [#135](https://github.com/phun-ky/typeof/issues/135)
+* 🤖 remove unused devDependencies ([a903428](https://github.com/phun-ky/typeof/commit/a9034285ee07b030c2fe0705e1b05d152d7db9c0)), references [#144](https://github.com/phun-ky/typeof/issues/144)
+* 🤖 typecheck the source and tests in CI ([73f02f1](https://github.com/phun-ky/typeof/commit/73f02f15deee524d228f8cc5ece89cad22198c04)), references [#133](https://github.com/phun-ky/typeof/issues/133)
+
+### Documentation
+
+* ✏️ add governance and roadmap, and bring the contributing guide up to date ([def122f](https://github.com/phun-ky/typeof/commit/def122f437a1e43872e92772c57e5e2b82d5b8f9)), references [#151](https://github.com/phun-ky/typeof/issues/151) [#146](https://github.com/phun-ky/typeof/issues/146) [#153](https://github.com/phun-ky/typeof/issues/153) [#145](https://github.com/phun-ky/typeof/issues/145) [#147](https://github.com/phun-ky/typeof/issues/147)
+* ✏️ isObjectPlain no longer differs across realms ([c673400](https://github.com/phun-ky/typeof/commit/c673400cf143cc61bff7862e03846261ea0e441e)), references [#169](https://github.com/phun-ky/typeof/issues/169)
+* ✏️ point homepage at the README ([b130183](https://github.com/phun-ky/typeof/commit/b130183f038d22409defd0cf162021e925114aab)), references [#145](https://github.com/phun-ky/typeof/issues/145)
+* ✏️ rewrite the security policy and add security-insights.yml ([a5bf34c](https://github.com/phun-ky/typeof/commit/a5bf34c8c6fc5d010cd23372f9ea931fe27a6986)), references [#142](https://github.com/phun-ky/typeof/issues/142)
+* ✏️ say the package ships CommonJS as well as ES modules ([a1e2899](https://github.com/phun-ky/typeof/commit/a1e28992224cbeead4c8f59089d3a64caf3e735f)), references [#130](https://github.com/phun-ky/typeof/issues/130)
+
+### Bug
+
+* 🐛 isObjectPlain recognises plain objects from another realm ([edb6198](https://github.com/phun-ky/typeof/commit/edb6198799732f835cc2f00a0981a7638f3b3ba2)), closes [#169](https://github.com/phun-ky/typeof/issues/169)
+
+### Refactoring
+
+* 💡 remove an unreachable catch from isClass ([3fe373d](https://github.com/phun-ky/typeof/commit/3fe373d1d80334031d0ceea17250e7280ece607a)), references [#137](https://github.com/phun-ky/typeof/issues/137)
+
 ## [3.0.9](https://github.com/phun-ky/typeof/compare/3.0.8...3.0.9) (2026-10-23)
 
 ### Tasks

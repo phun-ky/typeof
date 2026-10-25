@@ -2,7 +2,7 @@
 
 ---
 
-> Last updated 2026-10-23T12:26:01.851Z
+> Last updated 2026-10-25T09:25:37.416Z
 
 ## Type Aliases
 
@@ -12,7 +12,7 @@
 type BuiltInCallable = BuiltInConstructor | typeof BigInt | typeof Symbol;
 ```
 
-Defined in: [main.ts:524](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L524)
+Defined in: [main.ts:536](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L536)
 
 Built-in globals that are **callable**:
 
@@ -47,7 +47,7 @@ type BuiltInConstructor =
   | PromiseConstructor;
 ```
 
-Defined in: [main.ts:437](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L437)
+Defined in: [main.ts:449](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L449)
 
 A union of standard JavaScript **constructable** built-ins
 (e.g., `Object`, `Array`, `Date`, `Map`, etc.).
@@ -156,7 +156,7 @@ if (isBuiltInCallable(fn)) {
 function isBuiltInCallable(value): value is BuiltInCallable;
 ```
 
-Defined in: [main.ts:562](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L562)
+Defined in: [main.ts:572](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L572)
 
 ##### Parameters
 
@@ -174,7 +174,7 @@ Defined in: [main.ts:562](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isBuiltInCallable(value): boolean;
 ```
 
-Defined in: [main.ts:567](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L567)
+Defined in: [main.ts:577](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L577)
 
 ##### Parameters
 
@@ -217,7 +217,7 @@ console.log(isBuiltInConstructor(123)); // Output: false
 function isBuiltInConstructor(value): value is BuiltInConstructor;
 ```
 
-Defined in: [main.ts:462](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L462)
+Defined in: [main.ts:474](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L474)
 
 ##### Parameters
 
@@ -235,7 +235,7 @@ Defined in: [main.ts:462](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isBuiltInConstructor(value): boolean;
 ```
 
-Defined in: [main.ts:469](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L469)
+Defined in: [main.ts:481](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L481)
 
 ##### Parameters
 
@@ -284,7 +284,7 @@ console.log(isClass(null)); // Output: false
 function isClass(value): value is ClassCtor<any>;
 ```
 
-Defined in: [main.ts:383](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L383)
+Defined in: [main.ts:397](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L397)
 
 ##### Parameters
 
@@ -302,7 +302,7 @@ Defined in: [main.ts:383](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isClass(value): boolean;
 ```
 
-Defined in: [main.ts:388](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L388)
+Defined in: [main.ts:402](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L402)
 
 ##### Parameters
 
@@ -332,13 +332,13 @@ The value to check.
 function isDefined<T>(value): value is Exclude<T, undefined>;
 ```
 
-Defined in: [main.ts:165](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L165)
+Defined in: [main.ts:164](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L164)
 
 ##### Type Parameters
 
-| Type Parameter |
-| -------------- |
-| `T`            |
+| Type Parameter                    |
+| --------------------------------- |
+| <a id="type-parameter-t"></a> `T` |
 
 ##### Parameters
 
@@ -356,7 +356,7 @@ Defined in: [main.ts:165](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isDefined(value): boolean;
 ```
 
-Defined in: [main.ts:170](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L170)
+Defined in: [main.ts:169](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L169)
 
 ##### Parameters
 
@@ -386,7 +386,7 @@ The value to check.
 function isFunction(value): value is (args: unknown[]) => unknown;
 ```
 
-Defined in: [main.ts:656](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L656)
+Defined in: [main.ts:666](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L666)
 
 ##### Parameters
 
@@ -404,7 +404,7 @@ Defined in: [main.ts:656](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isFunction(value): boolean;
 ```
 
-Defined in: [main.ts:663](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L663)
+Defined in: [main.ts:673](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L673)
 
 ##### Parameters
 
@@ -448,7 +448,7 @@ console.log(isInstanceOfUnknownClass([])); // Output: true
 function isInstanceOfUnknownClass(value): value is object;
 ```
 
-Defined in: [main.ts:618](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L618)
+Defined in: [main.ts:628](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L628)
 
 ##### Parameters
 
@@ -466,7 +466,7 @@ Defined in: [main.ts:618](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isInstanceOfUnknownClass(value): boolean;
 ```
 
-Defined in: [main.ts:623](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L623)
+Defined in: [main.ts:633](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L633)
 
 ##### Parameters
 
@@ -500,9 +500,9 @@ Defined in: [main.ts:104](https://github.com/phun-ky/typeof/blob/main/src/main.t
 
 ##### Type Parameters
 
-| Type Parameter |
-| -------------- |
-| `T`            |
+| Type Parameter                      |
+| ----------------------------------- |
+| <a id="type-parameter-t-1"></a> `T` |
 
 ##### Parameters
 
@@ -554,9 +554,9 @@ Defined in: [main.ts:64](https://github.com/phun-ky/typeof/blob/main/src/main.ts
 
 ##### Type Parameters
 
-| Type Parameter |
-| -------------- |
-| `T`            |
+| Type Parameter                      |
+| ----------------------------------- |
+| <a id="type-parameter-t-2"></a> `T` |
 
 ##### Parameters
 
@@ -608,9 +608,9 @@ Defined in: [main.ts:24](https://github.com/phun-ky/typeof/blob/main/src/main.ts
 
 ##### Type Parameters
 
-| Type Parameter |
-| -------------- |
-| `T`            |
+| Type Parameter                      |
+| ----------------------------------- |
+| <a id="type-parameter-t-3"></a> `T` |
 
 ##### Parameters
 
@@ -662,9 +662,9 @@ Defined in: [main.ts:144](https://github.com/phun-ky/typeof/blob/main/src/main.t
 
 ##### Type Parameters
 
-| Type Parameter |
-| -------------- |
-| `T`            |
+| Type Parameter                      |
+| ----------------------------------- |
+| <a id="type-parameter-t-4"></a> `T` |
 
 ##### Parameters
 
@@ -803,7 +803,7 @@ console.log(isObjectLoose(42)); // Output: false
 function isObjectLoose(value): value is object;
 ```
 
-Defined in: [main.ts:307](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L307)
+Defined in: [main.ts:321](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L321)
 
 ##### Parameters
 
@@ -821,7 +821,7 @@ Defined in: [main.ts:307](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isObjectLoose(value): boolean;
 ```
 
-Defined in: [main.ts:312](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L312)
+Defined in: [main.ts:326](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L326)
 
 ##### Parameters
 
@@ -842,6 +842,9 @@ Determines whether a value is a plain object (i.e., created via an object litera
 
 This excludes arrays, functions, class instances, built-ins like `Date`/`Map`/`Set`,
 and other exotic objects.
+
+Plain objects from another realm, such as an iframe or a `node:vm` context,
+count too.
 
 #### Param
 
@@ -881,7 +884,7 @@ if (isObjectPlain(value)) {
 function isObjectPlain(value): value is Record<string, unknown>;
 ```
 
-Defined in: [main.ts:186](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L186)
+Defined in: [main.ts:184](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L184)
 
 ##### Parameters
 
@@ -899,7 +902,7 @@ Defined in: [main.ts:186](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isObjectPlain(value): boolean;
 ```
 
-Defined in: [main.ts:191](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L191)
+Defined in: [main.ts:189](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L189)
 
 ##### Parameters
 
@@ -960,7 +963,7 @@ console.log(isObjectStrict(null)); // Output: false
 function isObjectStrict(value): value is Record<string, unknown>;
 ```
 
-Defined in: [main.ts:237](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L237)
+Defined in: [main.ts:253](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L253)
 
 ##### Parameters
 
@@ -978,7 +981,7 @@ Defined in: [main.ts:237](https://github.com/phun-ky/typeof/blob/main/src/main.t
 function isObjectStrict(value): boolean;
 ```
 
-Defined in: [main.ts:244](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L244)
+Defined in: [main.ts:260](https://github.com/phun-ky/typeof/blob/main/src/main.ts#L260)
 
 ##### Parameters
 
