@@ -77,6 +77,73 @@ What you can't rely on:
   `isBuiltInConstructor` and `isBuiltInCallable` don't recognise them.
   `isObjectPlain` and `isObjectStrict` do recognise plain objects from another
   realm.
+- **`isObjectStrict` against forged prototypes.** It returns `true` for an
+  object whose prototype is a custom object with its own `constructor: Object`,
+  such as `Object.create({ constructor: Object })`. `isObjectPlain` rejects it;
+  use `isObjectPlain` when the value comes from untrusted code
+  ([#174](https://github.com/phun-ky/typeof/issues/174)).
+
+## Assurance Case
+
+Why the expectations above hold, and where they stop.
+
+**Threat model.** typeof runs inside its caller's code and does no I/O. The
+threats that matter are:
+
+1. **A hostile value** passed to a helper by untrusted code, built to make a
+   check give the wrong answer (for example an object that claims to be plain)
+   or to throw (a proxy whose traps throw).
+2. **A compromised supply chain**: a malicious dependency, build tool, GitHub
+   Action or workflow change that ends up in the published package.
+3. **A compromised publishing path**: someone publishing to npm or pushing to
+   `main` without going through the project's checks.
+
+**Trust boundaries.**
+
+- **Between the caller and a helper:** the value is untrusted. A helper trusts
+  only the built-ins of its own realm (`typeof`, `Object.getPrototypeOf`,
+  `Object.prototype.toString`, `Function.prototype.toString`), and never calls
+  the value's own methods directly. Those built-ins can still run the value's
+  getters and proxy traps, which is how a hostile value can make a helper
+  throw.
+- **Between the repository and npm:** code reaches users only through the
+  publish workflow on `main`, after the required checks, with provenance that
+  names the commit and workflow.
+- **Between development tools and the package:** development dependencies run
+  at build time only. The published builds contain only this package's code,
+  which `npm run check:pack` checks on every pull request and release.
+
+**Secure design principles applied.**
+
+- **Economy of mechanism:** one module with no runtime dependencies; each
+  helper is a few lines.
+- **Minimal attack surface:** no I/O, no state, no dynamic code, and nothing is
+  written to the value or to globals.
+- **Least privilege:** workflows have read-only tokens by default and get write
+  permissions per job; publishing to npm uses a short-lived OIDC token, not a
+  stored one.
+- **Defence in depth for the object checks:** `isObjectPlain` combines the
+  `Object.prototype.toString` tag, which a value can influence with
+  `Symbol.toStringTag`, with its prototype, which it can't fake as
+  `Object.prototype`; another realm's `Object.prototype` must also point back at
+  itself through its `constructor`.
+- **Open design:** everything above is in this repository, and nothing depends
+  on secrecy.
+
+**Common weaknesses, and how they're countered.**
+
+| Weakness                                        | How it's countered                                                                                                                                                                                                                                    |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Code injection (CWE-94, CWE-95)                 | No `eval`, `new Function` or dynamic imports; CodeQL checks every pull request                                                                                                                                                                        |
+| Prototype pollution (CWE-1321)                  | The helpers never write to objects; they read prototypes with `Object.getPrototypeOf` and own properties with `Object.prototype.hasOwnProperty.call`                                                                                                  |
+| Type confusion (CWE-843)                        | Checks rely on `typeof` and the prototype chain, not on properties of the value, except `isObjectStrict`'s constructor check ([#174](https://github.com/phun-ky/typeof/issues/174)); property-based tests check that the checks agree with each other |
+| Uncontrolled resource use (CWE-400)             | Every call does a fixed amount of work: nothing loops over the value's contents or recurses                                                                                                                                                           |
+| Uncaught exceptions (CWE-248)                   | Documented under "What you can't rely on" for the three helpers that pass on errors from hostile values ([#170](https://github.com/phun-ky/typeof/issues/170))                                                                                        |
+| Malicious or vulnerable dependencies (CWE-1357) | No runtime dependencies; locked, reviewed and audited development dependencies; dependency review on every pull request; Actions pinned to commit SHAs                                                                                                |
+| Tampered releases (CWE-494)                     | Published only from GitHub Actions with Sigstore-signed provenance and an SBOM; rulesets protect `main`; every commit is signed off under the DCO                                                                                                     |
+
+**Known gaps** are listed under "What you can't rely on" above, each with its
+issue.
 
 ## Verifying Releases
 
