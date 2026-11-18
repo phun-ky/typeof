@@ -16,6 +16,7 @@ on:
       - 'custom-typedoc-plugin.js'
       - '**/*.md'
       - '.github/**'
+      - '.githooks/**'
       - '.bestpractices.json'
       - 'security-insights.yml'
       - 'typedoc.json'
@@ -36,6 +37,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # The AI attribution step reads every commit in the pull request
+      # Commits made in GitHub's web editor never run the local hook, so CI
+      # runs it over every commit in the pull request
+      - name: Check commit messages for AI attribution
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          status=0
+          for commit in $(git rev-list "$BASE..$HEAD"); do
+            git log -1 --format=%B "$commit" > "$RUNNER_TEMP/message"
+            .githooks/commit-msg "$RUNNER_TEMP/message" || { echo "::error::$commit carries AI attribution"; status=1; }
+          done
+          exit "$status"
       # check:pack also runs the packed package on the oldest Node engines allows
       - name: Setup Node.js 22.0.0, the engines floor
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -61,6 +78,8 @@ jobs:
         run: npm run check:pack
       - name: Test
         run: npm run test:ci
+      - name: Test the commit-msg hook # Rejected and accepted messages
+        run: npm run test:hooks
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
