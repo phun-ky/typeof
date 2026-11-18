@@ -81,6 +81,7 @@
     "test": "node --test --no-warnings 'src/**/__tests__/**/*.ts'",
     "pretest:ci": "rm -rf coverage && mkdir -p coverage",
     "test:ci": "node --test --no-warnings --experimental-test-coverage --test-coverage-include='src/**' --test-coverage-exclude='src/**/__tests__/**' --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=100 --test-reporter=cobertura --test-reporter-destination=coverage/cobertura-coverage.xml --test-reporter=spec --test-reporter-destination=stdout 'src/**/__tests__/**/*.ts'",
+    "test:hooks": "node --test scripts/__tests__/commit-msg.test.mjs",
     "typecheck": "tsc -p tsconfig.json"
   },
   "config": {
