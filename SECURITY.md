@@ -201,11 +201,18 @@ which has no runtime dependencies to override.
 exploited through this project would be allowed in dependency review and listed
 here, until a fix is reachable. There are none.
 
+**Advisories that don't affect typeof.** A known vulnerability in a development
+dependency, which never reaches the published package, is recorded with the
+reason as an [OpenVEX](https://openvex.dev/) statement in
+[`vex.openvex.json`](vex.openvex.json), and in `osv-scanner.toml`, until an
+update clears it.
+
 ## Code Scanning
 
 CodeQL analyses every pull request and every push to `main`. The ruleset on
 `main` blocks merging while CodeQL reports an error, or a security alert of high
-or critical severity. OpenSSF Scorecard runs on every push to `main`, with
+or critical severity. Other CodeQL alerts are fixed within 90 days, or dismissed
+with the reason when they are false positives. OpenSSF Scorecard runs on every push to `main`, with
 results at <https://scorecard.dev/viewer/?uri=github.com/phun-ky/typeof>.
 
 ## Secrets
