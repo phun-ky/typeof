@@ -8,4 +8,4 @@ reason = "picomatch: advisory withdrawn by GitHub, not a vulnerability."
 
 [[IgnoredVulns]]
 id = "GHSA-g3hv-75wg-m249"
-reason = "minimatch 10.x: fix only in 11.0.1, parents (typedoc, glob 13) still require ^10. Dev-only, patterns come from our own config, not untrusted input."
+reason = "minimatch 10.x: fix only in 11.0.1, parents (eslint, typescript-eslint, eslint-plugin-import-x, typedoc) still require ^10 and break on 11. Dev-only, patterns come from our own config, not untrusted input."

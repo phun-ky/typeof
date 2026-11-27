@@ -19,5 +19,5 @@ jobs:
         with:
           fail-on-severity: high
           fail-on-scopes: runtime, development
-          # Accepted exceptions would go in allow-ghsas, each explained in
-          # SECURITY.md; there are none
+          # Accepted exceptions, each explained in SECURITY.md
+          allow-ghsas: GHSA-g3hv-75wg-m249
