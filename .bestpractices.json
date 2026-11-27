@@ -278,7 +278,7 @@
   "osps_vm_02_01_status": "Met",
   "osps_vm_02_01_justification": "Security contacts: GitHub private vulnerability reporting and security@phun-ky.net: https://github.com/phun-ky/typeof/blob/main/SECURITY.md#reporting-a-vulnerability",
   "osps_ac_04_01_status": "Met",
-  "osps_ac_04_01_justification": "Every workflow sets read-only or no permissions at the top level, and jobs ask only for what they need: https://github.com/phun-ky/typeof/blob/main/.github/workflows/check.yml",
+  "osps_ac_04_01_justification": "Every workflow sets read-only or no permissions at the top level, and jobs ask only for what they need: https://github.com/phun-ky/typeof/tree/main/.github/workflows",
   "osps_br_02_01_status": "Met",
   "osps_br_02_01_justification": "Every release has a unique Semantic Versioning version, tagged as <version>: https://github.com/phun-ky/typeof/releases",
   "osps_br_04_01_status": "Met",
