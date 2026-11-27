@@ -198,15 +198,31 @@ checking that the tools still work. Overrides don't reach users of the package,
 which has no runtime dependencies to override.
 
 **Accepted exceptions.** A vulnerability that can't be fixed yet and can't be
-exploited through this project would be allowed in dependency review and listed
-here, until a fix is reachable. There are none.
+exploited through this project is allowed in dependency review and listed here,
+until a fix is reachable:
+
+- [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249),
+  minimatch 10.x, a development dependency through eslint, typescript-eslint,
+  eslint-plugin-import-x and typedoc. The fix is only in minimatch 11, and an
+  override to 11 breaks both eslint and typedoc, so it stays until both of them
+  move to 11. It can't be exploited here: minimatch only matches the glob
+  patterns in the repository's own configuration.
+
+**Advisories that don't affect typeof.** Each accepted exception is also
+recorded, with the reason, as an [OpenVEX](https://openvex.dev/) statement in
+[`vex.openvex.json`](vex.openvex.json) and as an ignore entry in
+`osv-scanner.toml`, and both are removed once the fix is in. Advisories that
+GitHub has withdrawn are not vulnerabilities, so they are only ignored in
+`osv-scanner.toml`.
 
 ## Code Scanning
 
 CodeQL analyses every pull request and every push to `main`. The ruleset on
 `main` blocks merging while CodeQL reports an error, or a security alert of high
-or critical severity. OpenSSF Scorecard runs on every push to `main`, with
-results at <https://scorecard.dev/viewer/?uri=github.com/phun-ky/typeof>.
+or critical severity. Other CodeQL alerts are fixed within 90 days, or dismissed
+with the reason when they are false positives. OpenSSF Scorecard runs on every
+push to `main`, with results at
+<https://scorecard.dev/viewer/?uri=github.com/phun-ky/typeof>.
 
 ## Secrets
 

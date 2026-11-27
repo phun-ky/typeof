@@ -15,8 +15,8 @@ on:
     branches: ['main']
   workflow_dispatch:
 
-# Read-only by default; the job asks for exactly what it needs
-permissions: read-all
+# No permissions by default; the job asks for exactly what it needs
+permissions: {}
 
 jobs:
   analysis:
